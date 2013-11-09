@@ -10,7 +10,6 @@ public class StartScreen implements Screen {
         terminal.write("This game open source, based off of Trystan's Ascii Panel.",1,2);
         terminal.write("WARNING: ALPHA VERSION: There's probably no content (besides this).",1,3);
         terminal.write("Made by Shreyas (anubiann00b) and Masilan (robomas).",1,4);
-
     }
 
     public Screen respondToUserInput(KeyEvent key) {
