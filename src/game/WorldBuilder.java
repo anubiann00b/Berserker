@@ -52,4 +52,8 @@ public class WorldBuilder {
     public WorldBuilder generateWorld() {
         return cellularAutomata(0.55,5,5);
     }
+    
+    public World create() {
+        return new World(tiles);
+    }
 }
