@@ -14,11 +14,12 @@ public class PlayScreen implements Screen {
     int mapHeight;
     private AsciiPanel terminal;
     private World world;
+    private Creature player;
     
     public PlayScreen() {
         mapWidth = 200;
         mapHeight = 92;
-        Creature player = new Creature();
+        Creature player = new Creature(5,5);
         createWorld();
     }
     
@@ -47,15 +48,12 @@ public class PlayScreen implements Screen {
             }
         }
     }
-
-    private void scrollBy(int mx, int my) {
-        player.moveBy(mx, my);
-    }
     
     private void displayMap() { //40 wide
         for(int i=0;i<15;i++) {
             write("The map goes here---------------------40",0,i);
         }
+        displayTiles(getScrollX(),getScrollY());
     }
 
     private void displayMessages() {
@@ -103,6 +101,20 @@ public class PlayScreen implements Screen {
     }
     
     public Screen respondToUserInput(KeyEvent key) {
-        return (key.getKeyCode() == KeyEvent.VK_ENTER ? new PlayScreen() : this);
-    }
+        switch (key.getKeyCode()) {
+            //case KeyEvent.VK_ESCAPE: return new DieScreen();
+            case KeyEvent.VK_LEFT: case KeyEvent.VK_NUMPAD4: case KeyEvent.VK_H: player.moveBy(-1, 0); break;
+            case KeyEvent.VK_RIGHT: case KeyEvent.VK_NUMPAD6: case KeyEvent.VK_L: player.moveBy(1, 0); break;
+            case KeyEvent.VK_UP: case KeyEvent.VK_NUMPAD8: case KeyEvent.VK_K: player.moveBy(0,-1); break;
+            case KeyEvent.VK_DOWN: case KeyEvent.VK_NUMPAD2:case KeyEvent.VK_J: player.moveBy(0, 1); break;
+            case KeyEvent.VK_Y: case KeyEvent.VK_NUMPAD7: player.moveBy(-1,-1); break;
+            case KeyEvent.VK_U: case KeyEvent.VK_NUMPAD9: player.moveBy( 1,-1); break;
+            case KeyEvent.VK_B: case KeyEvent.VK_NUMPAD1: player.moveBy(-1, 1); break;
+            case KeyEvent.VK_N: case KeyEvent.VK_NUMPAD3: player.moveBy( 1, 1); break;
+            case KeyEvent.VK_P: player.setHp(-1); break;
+            case KeyEvent.VK_O: player.setHp(1); break;
+            case KeyEvent.VK_1: player.setMp(1); break;
+            case KeyEvent.VK_2: player.setMp(-1); break;
+        }
+        return this;    }
 }

@@ -1,40 +1,30 @@
 package game;
 
 public class Creature {
-    public Creature(int m_hp, int m_dmg, int m_attack, int m_evasion, int m_armor)
-    {
-        x = 0;
-        y = 0;
-        randomStatSet();
-        //write new stats into message box
-    }
-    
-    public getX() {
-        
-    }
+    private int x;
+    private int y;
+    private int currentHp;
+    private int totalHp;
+    private int currentMp;
+    private int totalMp;
+    private int attack;
+    private int damage;
+    private int evasion;
+    private int armor;
     
     public Creature(int x, int y)
     {
         this.x = x;
         this.y = y;
-        randomStatSet();
-        //write new stats into message box
     }
     
-    public void randomStatSet()
-    {
-        totalHp = (int) (Math.random()*50 + 50);
-        attack = (int) (Math.random()*25 + 75);
-        damage = (int) (Math.random()*25);
-        evasion = (int) (Math.random()*15);
-        armor = (int) (Math.random()*15);
+    public int getX() { return x; }    
+    public int getY() { return y; }
+    public void setHp(int hp) { currentHp+=hp; }
+    public void setMp(int mp) { currentMp+=mp; }
+    
+    public void moveBy(int x, int y) {
+        this.x+=x;
+        this.y+=y;
     }
-    int currentHp;
-    int totalHp;
-    int attack;
-    int damage;
-    int evasion;
-    int armor;
-    int x;
-    int y;
 }
