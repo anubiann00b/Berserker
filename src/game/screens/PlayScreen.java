@@ -112,7 +112,9 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_1: player.setRp(1); break;
             case KeyEvent.VK_2: player.setRp(-1); break;
         }
-        
+        if (player.getCurrentHp()<1) {
+            return new DieScreen();
+        }
         world.update();	
 
         return this;
@@ -125,7 +127,7 @@ public class PlayScreen implements Screen {
     }
     
     public void displayInfo(AsciiPanel terminal) {
-        terminal.write("Name Level # Race Class",42,1);
+        terminal.write("BAZAKA",42,1);
         terminal.write("HP: " + player.getCurrentHp() + "/" + player.getMaxHp(),42,3);
         int hpRatio = 25*player.getCurrentHp()/player.getMaxHp();
         for (int i=0;i<hpRatio;i++) {
@@ -134,7 +136,7 @@ public class PlayScreen implements Screen {
         for (int i=0;i<25-hpRatio;i++) {
             terminal.write("-",54+hpRatio+i,3,Color.GRAY);
         }
-        terminal.write("MP: " + player.getCurrentRp() + "/" + player.getMaxRp(),42,4);
+        terminal.write("RP: " + player.getCurrentRp() + "/" + player.getMaxRp(),42,4);
         if (player.getMaxRp()>0)
         {
             int mpRatio = 25*player.getCurrentRp()/player.getMaxRp();
