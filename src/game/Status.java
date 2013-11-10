@@ -4,6 +4,7 @@ import asciiPanel.AsciiPanel;
 import java.awt.Color;
 
 public enum Status {
+    NONE("", Color.BLACK, 0, 0, 0, 0, 0, 0),
     FREEZE("Frozen", AsciiPanel.brightBlue, 0, -3, 0, -2, 0, 3),
     BURN("Burned", AsciiPanel.yellow, 4, 0, 0, 0, 0, 1),
     POISON("Poisoned", AsciiPanel.green, -2, 0, 0, 0, 0, 6),

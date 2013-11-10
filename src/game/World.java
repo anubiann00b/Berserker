@@ -5,9 +5,7 @@ import java.util.ArrayList;
  
 public class World {
     private Tile[][] tiles;
-    //private ArrayList<Equipable> equipable;
-    //private ArrayList<Wearable> wearable;
-    private ArrayList<ArrayList> items;
+    private ArrayList<GroundedItem> items;
     private ArrayList<Creature> creatures;
     
     private int width;
@@ -46,10 +44,22 @@ public class World {
         return null;
     }
     
+    public GroundedItem getItem(int x, int y){
+        for (GroundedItem i : items){
+            if (i.getX() == x && i.getY() == y)
+                return i;
+        }
+        return null;
+    }
+    
     public void remove(Creature creature) {
         creatures.remove(creature);
     }
-
+    
+    public void remove(GroundedItem item) {
+        items.remove(item);
+    }
+    
     public void update(){
         for (Creature creature : creatures){
             creature.update();
@@ -68,5 +78,20 @@ public class World {
         creature.setX(x);
         creature.setY(y);
         creatures.add(creature);
+    }
+
+    public void addAtEmptyLocation(GroundedItem item) {
+        int x;
+        int y;
+
+        do {
+            x = (int)(Math.random() * width);
+            y = (int)(Math.random() * height);
+        }
+        while (!tile(x,y).isGround());
+
+        item.setX(x);
+        item.setY(y);
+        items.add(item);
     }
 }

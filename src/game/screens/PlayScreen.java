@@ -8,77 +8,89 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class PlayScreen implements Screen {
-	private World world;
-	private int screenWidth;
-	private int screenHeight;
-        private int mapWidth;
-        private int mapHeight;
-        private Creature player;
-        private FieldOfView fov;
-        private ArrayList<String> messages;
-	
-	public PlayScreen() {
-            messages = new ArrayList();
-            messages.add("Game Started!");
-            screenWidth = 40;
-            screenHeight = 14;
-            mapWidth = 200;
-            mapHeight = 92;
-            createWorld();
-            fov = new FieldOfView(world);
-            CreatureFactory creatureFactory = new CreatureFactory(world);
-            spawnCreatures(creatureFactory);
-	}
-        
-        private void spawnCreatures(CreatureFactory creatureFactory){
-            player = creatureFactory.newPlayer(fov);
+    private World world;
+    private int screenWidth;
+    private int screenHeight;
+    private int mapWidth;
+    private int mapHeight;
+    private Creature player;
+    private FieldOfView fov;
+    private ArrayList<String> messages;
 
-            for (int i=0;i<8000;i++){
-                creatureFactory.newPlant();
-            }
+    public PlayScreen() {
+        messages = new ArrayList();
+        messages.add("Game Started!");
+        screenWidth = 40;
+        screenHeight = 14;
+        mapWidth = 200;
+        mapHeight = 92;
+        createWorld();
+        fov = new FieldOfView(world);
+        CreatureFactory creatureFactory = new CreatureFactory(world);
+        spawnCreatures(creatureFactory);
+        ItemFactory itemFactory = new ItemFactory(world);
+        spawnItems(itemFactory);
+    }
+
+    private void spawnCreatures(CreatureFactory creatureFactory){
+        player = creatureFactory.newPlayer(fov);
+
+        for (int i=0;i<8000;i++){
+            creatureFactory.newPlant();
         }
-        
-	private void createWorld() {
-            world = new WorldBuilder(mapWidth, mapHeight)
-                    .makeCaves()
-                    .build();
-	}
+    }    
+    
+    private void spawnItems(ItemFactory itemFactory){
+        for (int i=0;i<8000;i++){
+            itemFactory.spawnItem();
+        }
+    }
 
-	public int getScrollX() { return Math.max(0,Math.min(player.getX()-screenWidth/2,world.width()-screenWidth)); }
-	
-	public int getScrollY() { return Math.max(0,Math.min(player.getY()-screenHeight/2,world.height()-screenHeight)); }
-	
-	public void displayMap(AsciiPanel terminal) {
-            int left = getScrollX();
-            int top = getScrollY();
+    private void createWorld() {
+        world = new WorldBuilder(mapWidth, mapHeight)
+                .makeCaves()
+                .build();
+    }
 
-            displayTiles(terminal, left, top);
+    public int getScrollX() { return Math.max(0,Math.min(player.getX()-screenWidth/2,world.width()-screenWidth)); }
 
-            terminal.write(player.getGlyph(), player.getX() - left + 1, player.getY() - top + 1, player.getColor());
-	}
+    public int getScrollY() { return Math.max(0,Math.min(player.getY()-screenHeight/2,world.height()-screenHeight)); }
 
-	private void displayTiles(AsciiPanel terminal, int left, int top) {
-            fov.update(player.getX(), player.getY(),player.getVisionRadius());
-            for (int x = 0; x < screenWidth; x++) {
-                for (int y = 0; y < screenHeight; y++) {
-                    int wx = x + left;
-                    int wy = y + top;
-                    
-                    Creature creature = world.getCreature(wx, wy);
-                    if (player.canSee(wx, wy)) {
-                        terminal.write(world.getGlyph(wx, wy), x + 1, y + 1, world.getColor(wx, wy));
-                        if (creature != null)
-                            terminal.write(creature.getGlyph(), creature.getX() - left + 1, creature.getY() - top + 1, creature.getColor());
-                    } else {
-                        terminal.write(fov.tile(wx, wy).glyph(), x + 1, y + 1, Color.DARK_GRAY);
+    public void displayMap(AsciiPanel terminal) {
+        int left = getScrollX();
+        int top = getScrollY();
+
+        displayTiles(terminal, left, top);
+
+        terminal.write(player.getGlyph(), player.getX() - left + 1, player.getY() - top + 1, player.getColor());
+    }
+
+    private void displayTiles(AsciiPanel terminal, int left, int top) {
+        fov.update(player.getX(), player.getY(),player.getVisionRadius());
+        for (int x = 0; x < screenWidth; x++) {
+            for (int y = 0; y < screenHeight; y++) {
+                int wx = x + left;
+                int wy = y + top;
+
+                Creature creature = world.getCreature(wx, wy);
+                GroundedItem item = world.getItem(wx, wy);
+                if (player.canSee(wx, wy)) {
+                    terminal.write(world.getGlyph(wx, wy), x + 1, y + 1, world.getColor(wx, wy));
+                    if (creature != null) {
+                        terminal.write(creature.getGlyph(), creature.getX() - left + 1, creature.getY() - top + 1, creature.getColor());
+                    } else if (item != null) {
+                        
                     }
+                } else {
+                    terminal.write(fov.tile(wx, wy).glyph(), x + 1, y + 1, Color.DARK_GRAY);
                 }
             }
-	}
-	
-	private void scrollBy(int mx, int my) {
-            player.moveBy(mx, my);
-	}
+        }
+    }
+
+    private void scrollBy(int mx, int my) {
+        player.moveBy(mx, my);
+    }
     
     public Screen respondToUserInput(KeyEvent key) {
         switch (key.getKeyCode()) {

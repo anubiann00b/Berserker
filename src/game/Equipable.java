@@ -1,5 +1,5 @@
 package game;
-
+// /\|[]{}()<>
 public enum Equipable {
     QUICKBLADE("Quickblade", 9, 1, 0, 0, 1),
     DAGGER("Dagger", 8, 2, 0, 0, 3),
@@ -40,7 +40,10 @@ public enum Equipable {
     private int rarity;
     public int getRarity() { return rarity; }
     
-    Equipable(String name, int attack, int damage, int defense, int evasion, int rarity)
+    private char glyph;
+    public int getGlyph() { return rarity; }
+    
+    Equipable(String name, int attack, int damage, int defense, int evasion, int rarity, char glyph)
     {
         this.name = name;
         this.attack = attack;
@@ -48,6 +51,7 @@ public enum Equipable {
         this.defense = defense;
         this.evasion = evasion;
         this.rarity = rarity;
+        this.glyph = glyph;
     }
 
 }

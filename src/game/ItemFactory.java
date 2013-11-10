@@ -9,10 +9,9 @@ public class ItemFactory {
         this.world = world;
     }
     
-    public Item spawnItem() {
-        //Item item = new Item(random stats);
-        //world.addAtEmptyLocation(item);
-        //return item;
-        return null;
+    public GroundedItem spawnItem() {
+        GroundedItem item = new GroundedItem(new Item());
+        world.addAtEmptyLocation(item);
+        return item;
     }
 }
