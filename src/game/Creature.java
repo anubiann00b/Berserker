@@ -194,7 +194,7 @@ public class Creature {
                 addMessage("Your grandpa's flawless technique shows off in your strike!");
             else if (r<1)
                 addMessage("YOU IMPALE THE LITTLE INSECT");
-            other.dealDamage((dmg-other.def+5)*2);
+            other.dealDamage((dmg+5)*2-other.def);
             setRp(3);
         } else if (atkRoll <= 1) {
             double r = Math.random();

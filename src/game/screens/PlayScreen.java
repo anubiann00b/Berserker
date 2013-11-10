@@ -33,7 +33,7 @@ public class PlayScreen implements Screen {
         spawnItems(itemFactory);
     }
 
-    private void spawnCreatures(){
+    private void spawnCreatures() {
         player = creatureFactory.newPlayer(fov);
 
         for (int i=0;i<50;i++) {
