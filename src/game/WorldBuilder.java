@@ -28,7 +28,7 @@ public class WorldBuilder {
                     for (int oy = -1; oy <= 1; oy++) {
                     if (x + ox < 0 || x + ox >= width || y + oy < 0 || y + oy >= height)
                         continue;
-                        if (tiles[x + ox][y + oy] == Tile.FLOOR)
+                        if (tiles2[x + ox][y + oy] == Tile.FLOOR)
                             floorCount++;
                         else
                             wallCount++;
@@ -52,7 +52,7 @@ public class WorldBuilder {
     public WorldBuilder generateWorld() {
         return cellularAutomata(0.55,5,5);
     }
-    
+  
     public World create() {
         return new World(tiles);
     }

@@ -5,13 +5,8 @@ public class World {
     private int width;
     private Tile[][] tiles;
     
-    public int getWidth() {
-        return width;
-    }
-    
-    public int getHeight() {
-        return height;
-    }
+    public int getWidth() { return this.width; }
+    public int getHeight() { return this.height; }
     
     public Tile getTile(int x, int y) {
         return tiles[x][y];
