@@ -9,10 +9,10 @@ public class ItemFactory {
         this.world = world;
     }
     
-    public Creature spawnItems() {
-        Creature player = new Creature(world, '@', AsciiPanel.brightWhite,20,10);
-        world.addAtEmptyLocation(player);
-        new PlayerAi(player, fov);
-        return player;
+    public Item spawnItem() {
+        //Item item = new Item(random stats);
+        //world.addAtEmptyLocation(item);
+        //return item;
+        return null;
     }
 }

@@ -27,8 +27,16 @@ public class PlayScreen implements Screen {
             createWorld();
             fov = new FieldOfView(world);
             CreatureFactory creatureFactory = new CreatureFactory(world);
-            player = creatureFactory.newPlayer(fov);
+            spawnCreatures(creatureFactory);
 	}
+        
+        private void spawnCreatures(CreatureFactory creatureFactory){
+            player = creatureFactory.newPlayer(fov);
+
+            for (int i = 0; i < 800; i++){
+                creatureFactory.newPlant();
+            }
+        }
         
 	private void createWorld() {
             world = new WorldBuilder(mapWidth, mapHeight)
@@ -60,7 +68,7 @@ public class PlayScreen implements Screen {
                     if (player.canSee(wx, wy)) {
                         terminal.write(world.getGlyph(wx, wy), x + 1, y + 1, world.getColor(wx, wy));
                         if (creature != null)
-                            terminal.write(creature.getGlyph(), creature.getX() + 1, creature.getY() - top + 1, creature.getColor());
+                            terminal.write(creature.getGlyph(), creature.getX() - left + 1, creature.getY() - top + 1, creature.getColor());
                     } else {
                         terminal.write(fov.tile(wx, wy).glyph(), x + 1, y + 1, Color.DARK_GRAY);
                     }

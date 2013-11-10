@@ -20,7 +20,7 @@ public class Creature {
     private CreatureAi ai;
     private int visionRadius;
     protected ArrayList<String> messages = new ArrayList();
-    protected ArrayList<Items> inventory = new ArrayList();
+    protected ArrayList<Item> inventory = new ArrayList();
 
     Creature(World world, char glyph, Color color, int maxHp, int maxMp) {
         this.world=world;
@@ -35,8 +35,10 @@ public class Creature {
     
     public void moveBy(int mx, int my) {
         Creature other = world.getCreature(x+mx, y+my);
-        
-        ai.onEnter(x+mx, y+my, world.tile(x+mx, y+my));
+        if (other == null)
+            ai.onEnter(x+mx, y+my, world.tile(x+mx, y+my));
+        else
+            attack(other);
     }
      
     public boolean canSee(int wx, int wy){
@@ -74,5 +76,13 @@ public class Creature {
     
     public void addMessage(String message) {
         messages.add(message);
+    }
+
+    private void attack(Creature other) {
+        world.remove(other);
+    }
+
+    public void update() {
+        ai.update();
     }
 }

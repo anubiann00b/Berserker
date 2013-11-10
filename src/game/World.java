@@ -46,6 +46,15 @@ public class World {
         return null;
     }
     
+    public void remove(Creature creature) {
+        creatures.remove(creature);
+    }
+
+    public void update(){
+        for (Creature creature : creatures){
+            creature.update();
+    }
+}
     public void addAtEmptyLocation(Creature creature) {
         int x;
         int y;
@@ -58,5 +67,6 @@ public class World {
 
         creature.setX(x);
         creature.setY(y);
+        creatures.add(creature);
     }
 }

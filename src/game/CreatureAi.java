@@ -28,4 +28,7 @@ public class CreatureAi {
     public ArrayList<String> getMessages() {
         return null;
     }
+
+    protected void update() {
+    }
 }
