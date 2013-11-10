@@ -53,6 +53,8 @@ public class Item {
     private Equipable generateType() {
         int r = (int) Math.floor(Math.random()*NUMBER_OF_EQUIPABLES);
         Equipable[] equipables = Equipable.values();
-        return equipables[r];
+        
+       return equipables[r];
+       
     }
 }
