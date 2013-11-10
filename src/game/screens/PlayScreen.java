@@ -111,6 +111,7 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_O: player.setHp(1); break;
             case KeyEvent.VK_1: player.setRp(1); break;
             case KeyEvent.VK_2: player.setRp(-1); break;
+            case KeyEvent.VK_COMMA: case KeyEvent.VK_G: player.pickUp();
         }
         if (player.getCurrentHp()<1) {
             return new DieScreen();
@@ -151,7 +152,9 @@ public class PlayScreen implements Screen {
         terminal.write("Dmg|" + player.getDmg(),51,5);
         terminal.write("Eva|" + player.getEva(),60,5);
         terminal.write("Def|" + player.getDef(),69,5);
-
+        terminal.write("Weapon : " + player.getWeapon().getType().getName());
+        terminal.write("Armor  : " + player.getArmor().getType().getName());
+        terminal.write("Shield : " + player.getShield().getType().getName());
     }
     
     public void displayMessages(AsciiPanel terminal) {
