@@ -33,7 +33,7 @@ public class PlayScreen implements Screen {
         private void spawnCreatures(CreatureFactory creatureFactory){
             player = creatureFactory.newPlayer(fov);
 
-            for (int i = 0; i < 800; i++){
+            for (int i=0;i<8000;i++){
                 creatureFactory.newPlant();
             }
         }
@@ -93,8 +93,8 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_N: case KeyEvent.VK_NUMPAD3: scrollBy( 1, 1); break;
             case KeyEvent.VK_P: player.setHp(-1); break;
             case KeyEvent.VK_O: player.setHp(1); break;
-            case KeyEvent.VK_1: player.setMp(1); break;
-            case KeyEvent.VK_2: player.setMp(-1); break;
+            case KeyEvent.VK_1: player.setRp(1); break;
+            case KeyEvent.VK_2: player.setRp(-1); break;
         }
         return this;
     }
@@ -115,12 +115,12 @@ public class PlayScreen implements Screen {
         for (int i=0;i<25-hpRatio;i++) {
             terminal.write("-",54+hpRatio+i,3,Color.GRAY);
         }
-        terminal.write("MP: " + player.getCurrentMp() + "/" + player.getMaxMp(),42,4);
-        if (player.getMaxMp()>0)
+        terminal.write("MP: " + player.getCurrentRp() + "/" + player.getMaxRp(),42,4);
+        if (player.getMaxRp()>0)
         {
-            int mpRatio = 25*player.getCurrentMp()/player.getMaxMp();
+            int mpRatio = 25*player.getCurrentRp()/player.getMaxRp();
             for (int i=0;i<mpRatio;i++) {
-                terminal.write("=",54+i,4,Color.BLUE);
+                terminal.write("=",54+i,4,AsciiPanel.brightRed);
             }
             for (int i=0;i<25-mpRatio;i++) {
                 terminal.write("-",54+mpRatio+i,4,Color.GRAY);
@@ -135,6 +135,7 @@ public class PlayScreen implements Screen {
     
     public void displayMessages(AsciiPanel terminal) {
         ArrayList<String> newMessages = player.getMessages();
+        Collections.reverse(newMessages);
         newMessages.addAll(messages);
         messages = newMessages;
         if (messages.size()>8) {
