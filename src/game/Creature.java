@@ -42,16 +42,21 @@ public class Creature {
     
     public void moveBy(int mx, int my) {
         Creature other = world.getCreature(x+mx, y+my);
+        GroundedItem item = world.getItem(x+mx, y+my);
         if (other == null) {
             ai.onEnter(x+mx, y+my, world.tile(x+mx, y+my));
             setRp(-1);
         } else {
             attack(other);
         }
+        if (item != null) {
+            addMessage("You find a " + item.getItem().getType().getName() + ".");
+        }
     }
      
     public boolean canSee(int wx, int wy) { return ai.canSee(wx, wy); }
-    public Tile tile(int x, int y) { return world.tile(x, y); }
+    public Tile getTile(int x, int y) { return world.tile(x, y); }
+    public Creature getCreature(int x, int y) { return world.getCreature(x, y); }
     private String getName() { return this.name; }
     public int getVisionRadius() { return visionRadius; }
     public Color getColor() { return color; }

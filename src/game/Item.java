@@ -46,7 +46,7 @@ public class Item {
             Brand[] brands = Brand.values();
             return brands[r];
         } else {
-            return null;
+            return Brand.NONE;
         }
     }
 

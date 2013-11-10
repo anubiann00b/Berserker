@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
  
 public class World {
     private Tile[][] tiles;
@@ -19,6 +20,7 @@ public class World {
         this.width = tiles.length;
         this.height = tiles[0].length;
         creatures = new ArrayList();
+        items = new ArrayList();
     }
     
     public Tile tile(int x, int y){
@@ -60,11 +62,13 @@ public class World {
         items.remove(item);
     }
     
-    public void update(){
-        for (Creature creature : creatures){
+    public void update() {
+        List<Creature> toUpdate = new ArrayList<Creature>(creatures);
+        for (Creature creature : toUpdate){
             creature.update();
+        }
     }
-}
+
     public void addAtEmptyLocation(Creature creature) {
         int x;
         int y;

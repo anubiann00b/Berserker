@@ -35,13 +35,17 @@ public class PlayScreen implements Screen {
     private void spawnCreatures(CreatureFactory creatureFactory){
         player = creatureFactory.newPlayer(fov);
 
-        for (int i=0;i<8000;i++){
+        for (int i=0;i<50;i++) {
             creatureFactory.newPlant();
+        }
+        
+        for (int i=0;i<250;i++) {
+            creatureFactory.newKobold(new FieldOfView(world), player);
         }
     }    
     
     private void spawnItems(ItemFactory itemFactory){
-        for (int i=0;i<8000;i++){
+        for (int i=0;i<100;i++){
             itemFactory.spawnItem();
         }
     }
@@ -108,6 +112,8 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_1: player.setRp(1); break;
             case KeyEvent.VK_2: player.setRp(-1); break;
         }
+        world.update();	
+
         return this;
     }
     

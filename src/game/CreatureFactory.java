@@ -16,10 +16,17 @@ public class CreatureFactory {
         return player;
     }
     
-    public Creature newPlant(){
-        Creature plant = new Creature("plant", world,'P',AsciiPanel.green,5,5,2);
+    public Creature newPlant() {
+        Creature plant = new Creature("plant", world,'P',AsciiPanel.green,5,0,2);
         world.addAtEmptyLocation(plant);
         new PlantAi(plant);
         return plant;
+    }
+    
+    public Creature newKobold(FieldOfView fov, Creature player) {
+        Creature kobold = new Creature("kobold", world,'K',AsciiPanel.yellow,15,0,5);
+        world.addAtEmptyLocation(kobold);
+        new KoboldAi(kobold, player);
+        return kobold;
     }
 }

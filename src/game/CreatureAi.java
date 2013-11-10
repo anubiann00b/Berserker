@@ -17,7 +17,7 @@ public class CreatureAi {
             return false;
      
         for (Point p : new Line(creature.getX(), creature.getY(), wx, wy)) {
-            if (creature.tile(p.x, p.y).isPassable() || p.x == wx && p.y == wy)
+            if (creature.getTile(p.x, p.y).isPassable() || p.x == wx && p.y == wy)
                 continue;
             return false;
         }
@@ -27,6 +27,12 @@ public class CreatureAi {
 
     public ArrayList<String> getMessages() {
         return null;
+    }
+    
+    public void wander() {
+        int mx = (int) (Math.random()*3)-1;
+        int my = (int) (Math.random()*3)-1;
+        creature.moveBy(mx, my);
     }
 
     protected void update() {
