@@ -10,9 +10,9 @@ public enum Status {
     CONFUSE("Confused", AsciiPanel.brightYellow, 0, -2, 0, -2, 0, 3),
     WEAKEN("Weakened", AsciiPanel.brightBlack, 0, -1, -3, -1, -3, 2),
     BUFF("Strengthened", AsciiPanel.blue, 0, 1, 1, 1, 1, 6),
-    BERSERK("Berserk", AsciiPanel.brightRed, 0, 3, 6, 0, 0, 5),
+    BERSERK("Berserk", AsciiPanel.brightMagenta, 0, 3, 6, 0, 0, 5),
     EXHAUST("Exhausted", AsciiPanel.magenta, 0, -1, -2, 0, -1, 0),
-    BLEED("Bleeding", AsciiPanel.red, -1, 0, 0, 0, 0, 8),
+    BLEED("Bleeding", AsciiPanel.brightRed, -1, 0, 0, 0, 0, 8),
     HEAL("Healed", AsciiPanel.brightGreen, 10, 0, 0, 0, 0, 0),
     ROT("Rotting", AsciiPanel.black, -3, -2, -2, -2, -2, 5);
     

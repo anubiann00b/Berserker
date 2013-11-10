@@ -7,7 +7,7 @@ public class World {
     private Tile[][] tiles;
     //private ArrayList<Equipable> equipable;
     //private ArrayList<Wearable> wearable;
-    private ArrayList<ArrayList> inventory;
+    private ArrayList<ArrayList> items;
     private ArrayList<Creature> creatures;
     
     private int width;
