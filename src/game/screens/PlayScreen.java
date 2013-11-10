@@ -16,6 +16,7 @@ public class PlayScreen implements Screen {
     private Creature player;
     private FieldOfView fov;
     private ArrayList<String> messages;
+    private CreatureFactory creatureFactory;
 
     public PlayScreen() {
         messages = new ArrayList();
@@ -26,26 +27,26 @@ public class PlayScreen implements Screen {
         mapHeight = 92;
         createWorld();
         fov = new FieldOfView(world);
-        CreatureFactory creatureFactory = new CreatureFactory(world);
-        spawnCreatures(creatureFactory);
+        creatureFactory = new CreatureFactory(world);
+        spawnCreatures();
         ItemFactory itemFactory = new ItemFactory(world);
         spawnItems(itemFactory);
     }
 
-    private void spawnCreatures(CreatureFactory creatureFactory){
+    private void spawnCreatures(){
         player = creatureFactory.newPlayer(fov);
 
         for (int i=0;i<50;i++) {
             creatureFactory.newPlant();
         }
         
-        for (int i=0;i<250;i++) {
+        for (int i=0;i<50;i++) {
             creatureFactory.newKobold(new FieldOfView(world), player);
         }
     }    
     
     private void spawnItems(ItemFactory itemFactory){
-        for (int i=0;i<100;i++){
+        for (int i=0;i<15;i++){
             itemFactory.spawnItem();
         }
     }
@@ -116,8 +117,11 @@ public class PlayScreen implements Screen {
         if (player.getCurrentHp()<1) {
             return new DieScreen();
         }
-        world.update();	
-
+        if (world.getKillCount()>=25) {
+            return new WinScreen();
+        }
+        world.update();
+        creatureFactory.newKobold(new FieldOfView(world), player);
         return this;
     }
     
@@ -128,7 +132,7 @@ public class PlayScreen implements Screen {
     }
     
     public void displayInfo(AsciiPanel terminal) {
-        terminal.write("BAZAKA",42,1);
+        terminal.write("BERSERKER V.1.0.0",42,1);
         terminal.write("HP: " + player.getCurrentHp() + "/" + player.getMaxHp(),42,3);
         int hpRatio = 25*player.getCurrentHp()/player.getMaxHp();
         for (int i=0;i<hpRatio;i++) {
@@ -155,6 +159,7 @@ public class PlayScreen implements Screen {
         terminal.write("Weapon : " + player.getWeapon().getType().getName(),42,7);
         terminal.write("Armor  : " + player.getArmor().getType().getName(),42,8);
         terminal.write("Shield : " + player.getShield().getType().getName(),42,9);
+        terminal.write("Kills: " + world.getKillCount(),42,11);
     }
     
     public void displayMessages(AsciiPanel terminal) {

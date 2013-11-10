@@ -6,11 +6,12 @@ import asciiPanel.AsciiPanel;
 public class DieScreen implements Screen {
  
     public void displayOutput(AsciiPanel terminal) {
-        terminal.write("This screen will display death messages.",0,0);
-        terminal.write("(Enter to restart)",0,1);
+        terminal.writeCenter("Being a Berserker is hard...",1);
+        terminal.writeCenter("Better luck next time!",2);
+        terminal.writeCenter("(Enter to restart)",3);
     }
  
     public Screen respondToUserInput(KeyEvent key) {
-        return key.getKeyCode() == KeyEvent.VK_ENTER ? new PlayScreen() : this;
+        return key.getKeyCode() == KeyEvent.VK_ENTER ? new StartScreen() : this;
     }
 }

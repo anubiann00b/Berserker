@@ -10,6 +10,10 @@ public class World {
     private ArrayList<Creature> creatures;
     
     private int width;
+    private int killCount=0;
+    public int getKillCount() {
+        return killCount;
+    }
     public int width() { return width; }
  
     private int height;
@@ -46,7 +50,7 @@ public class World {
         return null;
     }
     
-    public GroundedItem getItem(int x, int y){
+    public GroundedItem getItem(int x, int y) {
         for (GroundedItem i : items){
             if (i.getX() == x && i.getY() == y)
                 return i;
@@ -54,8 +58,15 @@ public class World {
         return null;
     }
     
+    public void setItem(GroundedItem item) {
+        items.add(item);
+    }
+    
     public void remove(Creature creature) {
         creatures.remove(creature);
+        if (creature.getName().equals("kobold")) {
+            killCount++;
+        }
     }
     
     public void remove(GroundedItem item) {

@@ -42,6 +42,6 @@ public class ApplicationMain extends JFrame implements KeyListener {
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setVisible(true);
         app.setBackground(Color.black);
-        app.setTitle("CrawleR 0.0.0");
+        app.setTitle("BERSERKER");
     }
 }

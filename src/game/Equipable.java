@@ -23,7 +23,7 @@ public enum Equipable {
     STEEL("Steel Armor", 0, 0, 8, -3, 5, '}', Color.LIGHT_GRAY, 1),
     LEAD("Lead Armor", 0, 0, 11, -5, 3, '}', AsciiPanel.brightBlue, 1),
     DIAMOND("Diamond Armor", 0, 0, 14, -7, 1, '}', AsciiPanel.blue, 1),
-    LONGSLEEVES("Long Sleeves", 0,0,0,0,0, '*', Color.LIGHT_GRAY, 1),
+    LONGSLEEVES("Long Sleeves", 0,0,0,0,0, '*', Color.LIGHT_GRAY, 2),
     BUCKLER("Buckler", 0, 0, 2, 3, 2, '*', Color.LIGHT_GRAY, 2),
     LIGHT("Light Shield", 0, 0, -1, 5, 6, '*', AsciiPanel.brightBlue, 2),
     HEAVY("Heavy Shield", 0, 0, -3, 8, 2, '*', AsciiPanel.blue, 2);

@@ -72,18 +72,49 @@ public class Creature {
     public void pickUp()
     {
         GroundedItem item = world.getItem(x, y);
-        
+        if (item == null) {
+            addMessage("You sucessfully pick up nothing!");
+            return;
+        }
         if (item.getItem().getType().getType() == 0)
         {
+            this.atk -= this.weapon.getType().getAttack();
+            this.dmg -= this.weapon.getType().getDamage();
+            addMessage(this.weapon.getType().getName() + " dropped.");
+            GroundedItem newItem = new GroundedItem(this.weapon, x, y);
+            world.remove(item);
             this.weapon = item.getItem();
+            addMessage(item.getItem().getType().getName() + " equipped.");
+            this.atk += this.weapon.getType().getAttack();
+            this.dmg += this.weapon.getType().getDamage();
+            world.setItem(newItem);
         }
         else if (item.getItem().getType().getType() == 1)
         {
+            this.def -= this.armor.getType().getDefense();
+            this.eva -= this.armor.getType().getEvasion();
+            addMessage(this.armor.getType().getName() + " dropped.");
+            GroundedItem newItem = new GroundedItem(this.armor, x, y);
+            world.remove(item);
             this.armor = item.getItem();
+            addMessage(item.getItem().getType().getName() + " equipped.");
+            this.def += this.armor.getType().getDefense();
+            this.eva += this.armor.getType().getEvasion();
+            world.setItem(newItem);
         }
         else if (item.getItem().getType().getType() == 2)
         {
+            this.def -= this.shield.getType().getDefense();
+            this.eva -= this.shield.getType().getEvasion();
+            addMessage(this.shield.getType().getName() + " dropped.");
+            GroundedItem newItem = new GroundedItem(this.shield, x, y);
+            world.setItem(newItem);
+            world.remove(item);
             this.shield = item.getItem();
+            addMessage(item.getItem().getType().getName() + " equipped.");
+            this.def += this.shield.getType().getDefense();
+            this.eva += this.shield.getType().getEvasion();
+            world.setItem(newItem);
         }
     }
     
@@ -95,44 +126,9 @@ public class Creature {
             setRp(-1);
         } else if (other.isEvil() != this.isEvil) {
             attack(other);
-        } else {
-            
         }
         if (item != null) {
             addMessage("You find a " + item.getItem().getType().getName() + ".");
-            addMessage("Press 'g' to pick up " + item.getItem().getType().getName() + ".");
-            
-            if (item.getItem().getType().getType() == 0)
-            {
-                this.atk -= this.weapon.getType().getAttack();
-                this.dmg -= this.weapon.getType().getDamage();
-                addMessage(item.getItem().getType().getName() + " dropped.");
-                
-                this.weapon = item.getItem();
-                addMessage(item.getItem().getType().getName() + " equipped.");
-                this.atk += this.weapon.getType().getAttack();
-                this.dmg += this.weapon.getType().getDamage();
-            }
-            else if (item.getItem().getType().getType() == 1)
-            {
-                this.def -= this.weapon.getType().getDefense();
-                this.eva -= this.weapon.getType().getEvasion();
-                addMessage(item.getItem().getType().getName() + " dropped.");
-                this.armor = item.getItem();
-                addMessage(item.getItem().getType().getName() + " equipped.");
-                this.def += this.weapon.getType().getDefense();
-                this.eva += this.weapon.getType().getEvasion();
-            }
-            else if (item.getItem().getType().getType() == 2)
-            {
-                this.def -= this.weapon.getType().getDefense();
-                this.eva -= this.weapon.getType().getEvasion();
-                addMessage(item.getItem().getType().getName() + " dropped.");
-                this.shield = item.getItem();
-                addMessage(item.getItem().getType().getName() + " equipped.");
-                this.def += this.weapon.getType().getDefense();
-                this.eva += this.weapon.getType().getEvasion();
-            }
         }
     }
     
@@ -140,7 +136,7 @@ public class Creature {
     public boolean canSee(int wx, int wy) { return ai.canSee(wx, wy); }
     public Tile getTile(int x, int y) { return world.tile(x, y); }
     public Creature getCreature(int x, int y) { return world.getCreature(x, y); }
-    private String getName() { return this.name; }
+    public String getName() { return this.name; }
     public int getVisionRadius() { return visionRadius; }
     public Color getColor() { return color; }
     public char getGlyph() { return glyph; }
@@ -187,18 +183,46 @@ public class Creature {
     }
 
     private void attack(Creature other) {
-        //To hit (value between 0 and 99)
         int atkRoll = (int) Math.floor(Math.random()*20) + 1;
         int dmgRoll = (int) Math.floor(Math.random()*5) + 1;
         if (atkRoll >= 20) {
-            addMessage("CRITICAL HIT!");
+            double r = Math.random();
+            if (r<0.2)
+                addMessage("Your weapon bestows your rage upon your victims!");
+            else if (r<0.4)
+                addMessage("You skewer the pathetic creature!");
+            else if (r<0.6)
+                addMessage("You just manage to pull of a devasting attack!");
+            else if (r<0.8)
+                addMessage("Your grandpa's flawless technique shows off in your strike!");
+            else if (r<1)
+                addMessage("YOU IMPALE THE LITTLE INSECT");
             other.setHp(-(dmg-other.def+5)*2);
-            setRp(2);
+            setRp(3);
         } else if (atkRoll <= 1) {
-            addMessage("You critically miss. Gj.");
-            setRp(-1);
+            double r = Math.random();
+            if (r<0.2)
+                addMessage("You are very MISS-leading in your combat ability.");
+            else if (r<0.4)
+                addMessage("Even a baby could of hit that.");
+            else if (r<0.6)
+                addMessage("You get an A for effort.");
+            else if (r<0.8)
+                addMessage("Who taught you to fight, your grandpa?");
+            else if (r<1)
+                addMessage("YOU SHAME YOUR FAMILY");            setRp(-1);
         } else if (atkRoll <= 10-(atk-other.eva)) {
-            addMessage("Aww, you miss. What a shame.");
+            double r = Math.random();
+            if (r<0.2)
+                addMessage("Your weapon barely grazes it. Try harder.");
+            else if (r<0.4)
+                addMessage("You miss.");
+            else if (r<0.6)
+                addMessage("You missed. Better luck next time!");
+            else if (r<0.8)
+                addMessage("Maybe you should train harder.");
+            else if (r<1)
+                addMessage("You must study more.");
         } else {
             addMessage("You strike the " + other.getName() + ".");
             other.setHp(-(dmg-other.def+dmgRoll));
@@ -206,7 +230,7 @@ public class Creature {
         }
         if (other.getCurrentHp()<1) {
             world.remove(other);
-            addMessage("You vanquish the " + other.getName() + "!");
+            addMessage("The " + other.getName() + " dies!");
             setRp(1);
         }
     }
