@@ -1,24 +1,47 @@
 package game;
 
+import java.awt.Color;
+ 
 public class World {
-    private int height;
-    private int width;
     private Tile[][] tiles;
+    private int width;
+    public int width() { return width; }
+ 
+    private int height;
+    public int height() { return height; }
+ 
+    public World(Tile[][] tiles){
+        this.tiles = tiles;
+        this.width = tiles.length;
+        this.height = tiles[0].length;
+    }
     
-    public int getWidth() { return this.width; }
-    public int getHeight() { return this.height; }
-    
-    public Tile getTile(int x, int y) {
+    public Tile tile(int x, int y){
         if (x < 0 || x >= width || y < 0 || y >= height)
-            return Tile.BOUNDARIES;
+            return Tile.BOUNDS;
         else
             return tiles[x][y];
     }
-
     
-    public World(Tile[][] tiles) {
-        this.height = tiles.length;
-        this.width = tiles[0].length;
-        this.tiles = tiles;
+    public char glyph(int x, int y) {
+        return tile(x, y).glyph();
+    }
+    
+    public Color color(int x, int y) {
+        return tile(x, y).color();
+    }
+    
+    public void addAtEmptyLocation(Creature creature) {
+        int x;
+        int y;
+
+        do {
+            x = (int)(Math.random() * width);
+            y = (int)(Math.random() * height);
+        }
+        while (!tile(x,y).isGround());
+
+        creature.setX(x);
+        creature.setY(y);
     }
 }

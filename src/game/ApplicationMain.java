@@ -6,18 +6,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import game.screens.*;
 import java.awt.Color;
+//import java.awt.image.BufferedImage;
+//import java.io.IOException;
+//import javax.imageio.ImageIO;
+//import javax.swing.ImageIcon;
 
 public class ApplicationMain extends JFrame implements KeyListener {
-    
-    private final int WIDTH = 80;
-    private final int HEIGHT = 24;
     
     private AsciiPanel terminal;
     private Screen screen;
  
     public ApplicationMain() {
         super();
-        terminal = new AsciiPanel(WIDTH+2,HEIGHT+2);
         terminal = new AsciiPanel(80,24);
         add(terminal);
         pack();
@@ -46,6 +46,19 @@ public class ApplicationMain extends JFrame implements KeyListener {
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setVisible(true);
         app.setBackground(Color.black);
-        app.setTitle("CrawlR 0.0.0");
+        app.setTitle("CrawleR 0.0.0");
+        /*ImageIcon img = new ImageIcon("icon.png");
+        app.setIconImage(img.getImage());*/
+        
+        /*BufferedImage image = null;
+        try {
+            image = ImageIO.read(
+                app.getClass().getResource("/icon.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        app.setIconImage(image);*/
+
+        //app.setResizable(false);
     }
 }
