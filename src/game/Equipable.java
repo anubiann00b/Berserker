@@ -1,26 +1,29 @@
 package game;
 // /\|[]{}()<>
+
+import java.awt.Color;
+
 public enum Equipable {
-    QUICKBLADE("Quickblade", 9, 1, 0, 0, 1),
-    DAGGER("Dagger", 8, 2, 0, 0, 3),
-    SHORTSWORD("Short Sword", 7, 3, 0, 0, 5),
-    RAPIER("Rapier", 6, 4, 0, 0, 7),
-    MAUL("Maul", 5, 5, 0, 0, 9),
-    SWORD("Sword", 4, 6, 0, 0, 7),
-    WARAXE("War Axe", 3, 7, 0, 0, 5),
-    BROADSWORD("Broad Sword", 2, 8, 0, 0, 3),
-    EXECAXE("Executioner's Axe", 1, 9, 0, 0, 1),
-    STARWEAVE("Starweave Armor", 0, 0, 0, 7, 1),
-    CLOTH("Cloth Armor", 0, 0, 1, 5, 3),
-    LEATHER("Leather Armor", 0, 0, 2, 3, 5),
-    HIDE("Hide Armor", 0, 0, 3, 1, 7),
-    SCALE("Scale Armor", 0, 0, 5, -1, 7),
-    STEEL("Steel Armor", 0, 0, 8, -3, 5),
-    LEAD("Lead Armor", 0, 0, 11, -5, 3),
-    DIAMOND("Diamond Armor", 0, 0, 14, -7, 1),
-    BUCKLER("Buckler Shield", 0, 0, 2, 3, 2),
-    LIGHT("Light Shield", 0, 0, -1, 5, 6),
-    HEAVY("Heavy Shield", 0, 0, -3, 8, 2);
+    QUICKBLADE("Quickblade", 9, 1, 0, 0, 1, ')'),
+    DAGGER("Dagger", 8, 2, 0, 0, 3, ')'),
+    SHORTSWORD("Short Sword", 7, 3, 0, 0, 5 ,')'),
+    RAPIER("Rapier", 6, 4, 0, 0, 7, '^'),
+    MAUL("Maul", 5, 5, 0, 0, 9, '^'),
+    SWORD("Sword", 4, 6, 0, 0, 7, '^'),
+    WARAXE("War Axe", 3, 7, 0, 0, 5, '\\'),
+    BROADSWORD("Broad Sword", 2, 8, 0, 0, 3, '\\'),
+    EXECAXE("Executioner's Axe", 1, 9, 0, 0, 1, '\\'),
+    STARWEAVE("Starweave Armor", 0, 0, 0, 7, 1, '('),
+    CLOTH("Cloth Armor", 0, 0, 1, 5, 3, '('),
+    LEATHER("Leather Armor", 0, 0, 2, 3, 5, ']'),
+    HIDE("Hide Armor", 0, 0, 3, 1, 7, ']'),
+    SCALE("Scale Armor", 0, 0, 5, -1, 7, ']'),
+    STEEL("Steel Armor", 0, 0, 8, -3, 5, '}'),
+    LEAD("Lead Armor", 0, 0, 11, -5, 3, '}'),
+    DIAMOND("Diamond Armor", 0, 0, 14, -7, 1, '}'),
+    BUCKLER("Buckler Shield", 0, 0, 2, 3, 2, '*'),
+    LIGHT("Light Shield", 0, 0, -1, 5, 6, '*'),
+    HEAVY("Heavy Shield", 0, 0, -3, 8, 2, '*');
   
     private String name;
     public String getName() { return name; }
@@ -41,10 +44,12 @@ public enum Equipable {
     public int getRarity() { return rarity; }
     
     private char glyph;
-    public int getGlyph() { return rarity; }
+    public char getGlyph() { return glyph; }
     
-    Equipable(String name, int attack, int damage, int defense, int evasion, int rarity, char glyph)
-    {
+    private Color color;
+    public Color getColor() { return color; }
+    
+    Equipable(String name, int attack, int damage, int defense, int evasion, int rarity, char glyph, Color color) {
         this.name = name;
         this.attack = attack;
         this.damage = damage;
@@ -52,6 +57,7 @@ public enum Equipable {
         this.evasion = evasion;
         this.rarity = rarity;
         this.glyph = glyph;
+        this.color = color;
     }
 
 }

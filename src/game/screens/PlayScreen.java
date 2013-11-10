@@ -79,7 +79,7 @@ public class PlayScreen implements Screen {
                     if (creature != null) {
                         terminal.write(creature.getGlyph(), creature.getX() - left + 1, creature.getY() - top + 1, creature.getColor());
                     } else if (item != null) {
-                        
+                        terminal.write(item.getItem().getType().getGlyph(), item.getX() - left + 1, item.getY() - top + 1, item.getItem().getType().getColor());
                     }
                 } else {
                     terminal.write(fov.tile(wx, wy).glyph(), x + 1, y + 1, Color.DARK_GRAY);
