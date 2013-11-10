@@ -4,8 +4,9 @@ import asciiPanel.AsciiPanel;
 import java.awt.Color;
 
 public enum Tile {
-    FLOOR('.',AsciiPanel.brightYellow,true,true),
-    WALL('#',AsciiPanel.brightYellow,false,false);
+    FLOOR('.',AsciiPanel.yellow,true,true),
+    WALL('#',AsciiPanel.yellow,false,false),
+    BOUNDARIES('x',AsciiPanel.white,false,false);
     
     private char Character;
     private boolean isWalkable;

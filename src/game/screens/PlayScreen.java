@@ -4,15 +4,14 @@ import asciiPanel.AsciiPanel;
 import game.*;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.lang.Math;
 
 public class PlayScreen implements Screen {
     private final int WIDTH = 80;
     private final int HEIGHT = 24;
     private final int MAP_WINDOW_WIDTH = 40;
     private final int MAP_WINDOW_HEIGHT = 15;
-    int mapWidth;
-    int mapHeight;
+    private int mapWidth;
+    private int mapHeight;
     private World world;
     private Creature player;
     
@@ -25,6 +24,7 @@ public class PlayScreen implements Screen {
     
     private void createWorld() {
         world = new WorldBuilder(mapWidth, mapHeight).generateWorld().create();
+        System.out.println(world.getHeight());        System.out.println(world.getWidth());
     }
     
     public void displayOutput(AsciiPanel terminal) {
@@ -33,19 +33,23 @@ public class PlayScreen implements Screen {
         displayInfo(terminal);
     }
     
-    public int getScrollX() { return Math.max(0,Math.min(player.getX()-MAP_WINDOW_WIDTH/2,world.getWidth()-MAP_WINDOW_WIDTH)); }
-    public int getScrollY() { return Math.max(0,Math.min(player.getY()-MAP_WINDOW_HEIGHT/2,world.getHeight()-MAP_WINDOW_HEIGHT)); }
+    //public int getScrollX() { return Math.max(0,Math.min(player.getX()-MAP_WINDOW_WIDTH/2,world.getWidth()-MAP_WINDOW_WIDTH)); }
+    //public int getScrollY() { return Math.max(0,Math.min(player.getY()-MAP_WINDOW_HEIGHT/2,world.getHeight()-MAP_WINDOW_HEIGHT)); }
+    public int getScrollX() { return player.getX(); }
+    public int getScrollY() { return player.getY(); }
 
     private void displayTiles(AsciiPanel terminal, int left, int top) {
         for (int x = 0; x < MAP_WINDOW_WIDTH; x++) {
             for (int y = 0; y < MAP_WINDOW_HEIGHT; y++) {
                 int wx = x + left;
                 int wy = y + top;
-
+                System.out.println(wx);
+                System.out.println(wy);
                 write(terminal, world.getTile(wx, wy).getChar(), x, y, world.getTile(wx, wy).getColor());
             }
         }
         write(terminal, player.getChar(), player.getX()-left, player.getY()-top, player.getColor());
+        System.out.println(player.getX()+ " " + player.getY());
     }
     
     private void displayMap(AsciiPanel terminal) { //40 wide
@@ -100,7 +104,7 @@ public class PlayScreen implements Screen {
             throw new IllegalArgumentException("Y bleeds into the overflow area.");
         }
         
-        terminal.write(c,x+1,y+1);
+        terminal.write(c,x+1,y+1,color);
     }
     
     public Screen respondToUserInput(KeyEvent key) {
