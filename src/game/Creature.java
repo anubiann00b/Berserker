@@ -76,8 +76,7 @@ public class Creature {
             addMessage("You sucessfully pick up nothing!");
             return;
         }
-        if (item.getItem().getType().getType() == 0)
-        {
+        if (item.getItem().getType().getType() == 0) {
             this.atk -= this.weapon.getType().getAttack();
             this.dmg -= this.weapon.getType().getDamage();
             addMessage(this.weapon.getType().getName() + " dropped.");
@@ -89,8 +88,7 @@ public class Creature {
             this.dmg += this.weapon.getType().getDamage();
             world.setItem(newItem);
         }
-        else if (item.getItem().getType().getType() == 1)
-        {
+        else if (item.getItem().getType().getType() == 1) {
             this.def -= this.armor.getType().getDefense();
             this.eva -= this.armor.getType().getEvasion();
             addMessage(this.armor.getType().getName() + " dropped.");
@@ -102,8 +100,7 @@ public class Creature {
             this.eva += this.armor.getType().getEvasion();
             world.setItem(newItem);
         }
-        else if (item.getItem().getType().getType() == 2)
-        {
+        else if (item.getItem().getType().getType() == 2) {
             this.def -= this.shield.getType().getDefense();
             this.eva -= this.shield.getType().getEvasion();
             addMessage(this.shield.getType().getName() + " dropped.");
@@ -197,7 +194,7 @@ public class Creature {
                 addMessage("Your grandpa's flawless technique shows off in your strike!");
             else if (r<1)
                 addMessage("YOU IMPALE THE LITTLE INSECT");
-            other.setHp(-(dmg-other.def+5)*2);
+            other.dealDamage((dmg-other.def+5)*2);
             setRp(3);
         } else if (atkRoll <= 1) {
             double r = Math.random();
@@ -210,7 +207,8 @@ public class Creature {
             else if (r<0.8)
                 addMessage("Who taught you to fight, your grandpa?");
             else if (r<1)
-                addMessage("YOU SHAME YOUR FAMILY");            setRp(-1);
+                addMessage("YOU SHAME YOUR FAMILY");
+            setRp(-1);
         } else if (atkRoll <= 10-(atk-other.eva)) {
             double r = Math.random();
             if (r<0.2)
@@ -225,17 +223,26 @@ public class Creature {
                 addMessage("You must study more.");
         } else {
             addMessage("You strike the " + other.getName() + ".");
-            other.setHp(-(dmg-other.def+dmgRoll));
+            other.dealDamage(dmg-other.def+dmgRoll);
             setRp(1);
         }
         if (other.getCurrentHp()<1) {
             world.remove(other);
             addMessage("The " + other.getName() + " dies!");
             setRp(1);
+            setHp(1);
         }
     }
 
     public void update() {
         ai.update();
+    }
+
+    public void dealDamage(int damage) {
+        if (damage < 1) {
+            setHp(-1);
+        } else {
+            setHp(-damage);
+        }
     }
 }

@@ -46,7 +46,7 @@ public class PlayScreen implements Screen {
     }    
     
     private void spawnItems(ItemFactory itemFactory){
-        for (int i=0;i<15;i++){
+        for (int i=0;i<25;i++){
             itemFactory.spawnItem();
         }
     }
@@ -99,7 +99,6 @@ public class PlayScreen implements Screen {
     
     public Screen respondToUserInput(KeyEvent key) {
         switch (key.getKeyCode()) {
-            case KeyEvent.VK_ESCAPE: return new DieScreen();
             case KeyEvent.VK_LEFT: case KeyEvent.VK_NUMPAD4: case KeyEvent.VK_H: scrollBy(-1, 0); break;
             case KeyEvent.VK_RIGHT: case KeyEvent.VK_NUMPAD6: case KeyEvent.VK_L: scrollBy(1, 0); break;
             case KeyEvent.VK_UP: case KeyEvent.VK_NUMPAD8: case KeyEvent.VK_K: scrollBy(0,-1); break;
