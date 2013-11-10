@@ -152,9 +152,9 @@ public class PlayScreen implements Screen {
         terminal.write("Dmg|" + player.getDmg(),51,5);
         terminal.write("Eva|" + player.getEva(),60,5);
         terminal.write("Def|" + player.getDef(),69,5);
-        terminal.write("Weapon : " + player.getWeapon().getType().getName());
-        terminal.write("Armor  : " + player.getArmor().getType().getName());
-        terminal.write("Shield : " + player.getShield().getType().getName());
+        terminal.write("Weapon : " + player.getWeapon().getType().getName(),42,7);
+        terminal.write("Armor  : " + player.getArmor().getType().getName(),42,8);
+        terminal.write("Shield : " + player.getShield().getType().getName(),42,9);
     }
     
     public void displayMessages(AsciiPanel terminal) {
