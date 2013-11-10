@@ -106,6 +106,8 @@ public class Creature {
             {
                 this.atk -= this.weapon.getType().getAttack();
                 this.dmg -= this.weapon.getType().getDamage();
+                addMessage(item.getItem().getType().getName() + " dropped.");
+                
                 this.weapon = item.getItem();
                 addMessage(item.getItem().getType().getName() + " equipped.");
                 this.atk += this.weapon.getType().getAttack();
@@ -115,6 +117,7 @@ public class Creature {
             {
                 this.def -= this.weapon.getType().getDefense();
                 this.eva -= this.weapon.getType().getEvasion();
+                addMessage(item.getItem().getType().getName() + " dropped.");
                 this.armor = item.getItem();
                 addMessage(item.getItem().getType().getName() + " equipped.");
                 this.def += this.weapon.getType().getDefense();
@@ -124,6 +127,7 @@ public class Creature {
             {
                 this.def -= this.weapon.getType().getDefense();
                 this.eva -= this.weapon.getType().getEvasion();
+                addMessage(item.getItem().getType().getName() + " dropped.");
                 this.shield = item.getItem();
                 addMessage(item.getItem().getType().getName() + " equipped.");
                 this.def += this.weapon.getType().getDefense();
