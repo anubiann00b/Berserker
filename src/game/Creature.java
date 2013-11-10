@@ -20,8 +20,13 @@ public class Creature {
     private Color color;
     private CreatureAi ai;
     private int visionRadius;
+    private boolean isEvil = true;
     protected ArrayList<String> messages = new ArrayList();
-    protected ArrayList<Item> inventory = new ArrayList();
+    //protected ArrayList<Item> inventory = new ArrayList();
+    private Item weapon;
+    private Item shield;
+    private Item armor;
+
     protected ArrayList<Status> statuses = new ArrayList();
 
     Creature(String name, World world, char glyph, Color color, int maxHp, int maxRp, int baseStats) {
@@ -38,6 +43,23 @@ public class Creature {
         dmg = baseStats;
         eva = baseStats;
         def = baseStats;
+        isEvil = true;
+    }
+    Creature(String name, World world, char glyph, Color color, int maxHp, int maxRp, int baseStats, boolean isEvil) {
+        this.name = name;
+        this.world = world;
+        this.glyph = glyph;
+        this.color = color;
+        this.maxHp = maxHp;
+        this.currentHp = maxHp;
+        this.maxRp = maxRp;
+        this.currentRp = 0;
+        this.visionRadius = 9;
+        this.isEvil = isEvil;
+        atk = baseStats;
+        dmg = baseStats;
+        eva = baseStats;
+        def = baseStats;
     }
     
     public void moveBy(int mx, int my) {
@@ -46,14 +68,17 @@ public class Creature {
         if (other == null) {
             ai.onEnter(x+mx, y+my, world.tile(x+mx, y+my));
             setRp(-1);
-        } else {
+        } else if (other.isEvil() != this.isEvil) {
             attack(other);
+        } else {
+            
         }
         if (item != null) {
             addMessage("You find a " + item.getItem().getType().getName() + ".");
         }
     }
-     
+    
+    public boolean isEvil() { return this.isEvil; }
     public boolean canSee(int wx, int wy) { return ai.canSee(wx, wy); }
     public Tile getTile(int x, int y) { return world.tile(x, y); }
     public Creature getCreature(int x, int y) { return world.getCreature(x, y); }

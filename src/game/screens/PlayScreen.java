@@ -112,6 +112,7 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_1: player.setRp(1); break;
             case KeyEvent.VK_2: player.setRp(-1); break;
         }
+        
         world.update();	
 
         return this;

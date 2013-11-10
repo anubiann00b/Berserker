@@ -21,5 +21,4 @@ public class Message {
     }
     public ColoredChar[] getMessage() { return characters; }
     public void setMessage(ColoredChar[] characters) { this.characters = characters; }
-    public void addColoredChar(ColoredChar ch) { 
 }
