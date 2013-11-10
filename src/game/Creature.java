@@ -75,6 +75,8 @@ public class Creature {
         }
         if (item != null) {
             addMessage("You find a " + item.getItem().getType().getName() + ".");
+            addMessage("Press 'z' to pick up " + item.getItem().getType().getName() + ".");
+            
         }
     }
     
