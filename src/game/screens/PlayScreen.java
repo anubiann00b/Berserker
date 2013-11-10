@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import game.*;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PlayScreen implements Screen {
 	private World world;
@@ -114,22 +115,22 @@ public class PlayScreen implements Screen {
                 terminal.write("-",54+mpRatio+i,4,Color.GRAY);
             }
         }
-        terminal.write("Atk|" + player.getAtk(),51,5);
-        terminal.write("Dmg|" + player.getDmg(),58,5);
-        terminal.write("Eva|" + player.getEva(),65,5);
-        terminal.write("Def|" + player.getDef(),72,5);
+        terminal.write("Atk|" + player.getAtk(),42,5);
+        terminal.write("Dmg|" + player.getDmg(),51,5);
+        terminal.write("Eva|" + player.getEva(),60,5);
+        terminal.write("Def|" + player.getDef(),69,5);
 
     }
     
     public void displayMessages(AsciiPanel terminal) {
         ArrayList<String> newMessages = player.getMessages();
-        messages.addAll(newMessages); //Adds to end.
+        newMessages.addAll(messages);
+        messages = newMessages;
         if (messages.size()>8) {
             for (int i=0;i<messages.size()-8;i++) {
-                messages.remove(i);
+                messages.remove(8+i);
             }
         }
-        //add(0,element);
         for (int i=0;i<messages.size();i++) {
             String message = messages.get(i);
             terminal.write(message,1,23-i);

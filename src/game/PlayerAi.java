@@ -20,7 +20,18 @@ public class PlayerAi extends CreatureAi {
             creature.setX(x);
             creature.setY(y);
         } else {
-            creature.addMessage("You can't move there!");
+            double r = Math.random();
+            if (r<0.2) {
+                creature.addMessage("Good luck trying to move into a wall...");
+            } else if (r<0.4) {
+                creature.addMessage("You can't move there...");
+            } else if (r<0.6) {
+                creature.addMessage("You bump into a stone wall...");
+            } else if (r<0.8) {
+                creature.addMessage("Ow.");
+            } else if (r<1) {
+                creature.addMessage("The wall mutters some choice adjectives.");
+            }
         }
     }
     
