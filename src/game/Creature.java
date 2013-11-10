@@ -63,7 +63,11 @@ public class Creature {
         dmg = baseStats;
         eva = baseStats;
         def = baseStats;
+        this.weapon = new Item(Equipable.MAUL, 0);
+        this.armor = new Item(Equipable.SHIRT, 0);
+        this.shield = new Item(Equipable.LONGSLEEVES, 0);
     }
+    
     
     public void pickUp()
     {
