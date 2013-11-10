@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Color;
+import asciiPanel.AsciiPanel;
 
 public class ColoredChar {
     
@@ -9,6 +10,13 @@ public class ColoredChar {
         this.color = color;
         this.character = character;
     }
+    
+    public void convert(char character, Color color)
+    {
+        this.color = color;
+        this.character = character;
+    }
+    
     private Color color;
     private char character;
        
