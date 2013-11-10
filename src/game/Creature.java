@@ -20,7 +20,7 @@ public class Creature {
     private CreatureAi ai;
     private int visionRadius;
     protected ArrayList<String> messages = new ArrayList();
-    //protected ArrayList<Items> inventory = new ArrayList();
+    protected ArrayList<Items> inventory = new ArrayList();
 
     Creature(World world, char glyph, Color color, int maxHp, int maxMp) {
         this.world=world;
@@ -34,6 +34,8 @@ public class Creature {
     }
     
     public void moveBy(int mx, int my) {
+        Creature other = world.getCreature(x+mx, y+my);
+        
         ai.onEnter(x+mx, y+my, world.tile(x+mx, y+my));
     }
      
