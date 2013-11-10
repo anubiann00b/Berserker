@@ -24,8 +24,11 @@ public class Creature {
     protected ArrayList<String> messages = new ArrayList();
     //protected ArrayList<Item> inventory = new ArrayList();
     private Item weapon;
+    public Item getWeapon() { return this.weapon; }
     private Item shield;
+    public Item getShield() { return this.shield; }
     private Item armor;
+    public Item getArmor() { return this.armor; }
 
     protected ArrayList<Status> statuses = new ArrayList();
 
@@ -62,6 +65,24 @@ public class Creature {
         def = baseStats;
     }
     
+    public void pickUp()
+    {
+        GroundedItem item = world.getItem(x, y);
+        
+        if (item.getItem().getType().getType() == 0)
+        {
+            this.weapon = item.getItem();
+        }
+        else if (item.getItem().getType().getType() == 1)
+        {
+            this.armor = item.getItem();
+        }
+        else if (item.getItem().getType().getType() == 2)
+        {
+            this.shield = item.getItem();
+        }
+    }
+    
     public void moveBy(int mx, int my) {
         Creature other = world.getCreature(x+mx, y+my);
         GroundedItem item = world.getItem(x+mx, y+my);
@@ -75,8 +96,35 @@ public class Creature {
         }
         if (item != null) {
             addMessage("You find a " + item.getItem().getType().getName() + ".");
-            addMessage("Press 'z' to pick up " + item.getItem().getType().getName() + ".");
+            addMessage("Press 'g' to pick up " + item.getItem().getType().getName() + ".");
             
+            if (item.getItem().getType().getType() == 0)
+            {
+                this.atk -= this.weapon.getType().getAttack();
+                this.dmg -= this.weapon.getType().getDamage();
+                this.weapon = item.getItem();
+                addMessage(item.getItem().getType().getName() + " equipped.");
+                this.atk += this.weapon.getType().getAttack();
+                this.dmg += this.weapon.getType().getDamage();
+            }
+            else if (item.getItem().getType().getType() == 1)
+            {
+                this.def -= this.weapon.getType().getDefense();
+                this.eva -= this.weapon.getType().getEvasion();
+                this.armor = item.getItem();
+                addMessage(item.getItem().getType().getName() + " equipped.");
+                this.def += this.weapon.getType().getDefense();
+                this.eva += this.weapon.getType().getEvasion();
+            }
+            else if (item.getItem().getType().getType() == 2)
+            {
+                this.def -= this.weapon.getType().getDefense();
+                this.eva -= this.weapon.getType().getEvasion();
+                this.shield = item.getItem();
+                addMessage(item.getItem().getType().getName() + " equipped.");
+                this.def += this.weapon.getType().getDefense();
+                this.eva += this.weapon.getType().getEvasion();
+            }
         }
     }
     
