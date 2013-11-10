@@ -19,8 +19,8 @@ public class PlayScreen implements Screen {
 	public PlayScreen() {
             messages = new ArrayList();
             messages.add("Game Started!");
-            screenWidth = 47;
-            screenHeight = 13;
+            screenWidth = 40;
+            screenHeight = 14;
             mapWidth = 200;
             mapHeight = 92;
             createWorld();
@@ -35,9 +35,9 @@ public class PlayScreen implements Screen {
                     .build();
 	}
 
-	public int getScrollX() { return Math.max(0, Math.min(player.getX() - screenWidth / 2, world.width() - screenWidth)); }
+	public int getScrollX() { return Math.max(0,Math.min(player.getX()-screenWidth/2,world.width()-screenWidth)); }
 	
-	public int getScrollY() { return Math.max(0, Math.min(player.getY() - screenHeight / 2, world.height() - screenHeight)); }
+	public int getScrollY() { return Math.max(0,Math.min(player.getY()-screenHeight/2,world.height()-screenHeight)); }
 	
 	public void displayMap(AsciiPanel terminal) {
             int left = getScrollX();
@@ -62,8 +62,6 @@ public class PlayScreen implements Screen {
                     }
                 }
             }
-                    System.out.println(player.getX()+ " " + player.getY());
-
 	}
 	
 	private void scrollBy(int mx, int my) {
@@ -96,32 +94,30 @@ public class PlayScreen implements Screen {
     }
     
     public void displayInfo(AsciiPanel terminal) {
-        //29 wide
-        terminal.write("Name Level #",51,1);
-        terminal.write("Race Class",51,2);
-        terminal.write("HP: " + player.getCurrentHp() + "/" + player.getMaxHp(),51,3);
-        int hpRatio = 16*player.getCurrentHp()/player.getMaxHp();
+        terminal.write("Name Level # Race Class",42,1);
+        terminal.write("HP: " + player.getCurrentHp() + "/" + player.getMaxHp(),42,3);
+        int hpRatio = 25*player.getCurrentHp()/player.getMaxHp();
         for (int i=0;i<hpRatio;i++) {
-            terminal.write("=",63+i,3,Color.GREEN);
+            terminal.write("=",54+i,3,Color.GREEN);
         }
-        for (int i=0;i<16-hpRatio;i++) {
-            terminal.write("-",63+hpRatio+i,3,Color.GRAY);
+        for (int i=0;i<25-hpRatio;i++) {
+            terminal.write("-",54+hpRatio+i,3,Color.GRAY);
         }
-        terminal.write("MP: " + player.getCurrentMp() + "/" + player.getMaxMp(),51,4);
+        terminal.write("MP: " + player.getCurrentMp() + "/" + player.getMaxMp(),42,4);
         if (player.getMaxMp()>0)
         {
-            int mpRatio = 16*player.getCurrentMp()/player.getMaxMp();
+            int mpRatio = 25*player.getCurrentMp()/player.getMaxMp();
             for (int i=0;i<mpRatio;i++) {
-                terminal.write("=",63+i,4,Color.BLUE);
+                terminal.write("=",54+i,4,Color.BLUE);
             }
-            for (int i=0;i<16-mpRatio;i++) {
-                terminal.write("-",63+mpRatio+i,4,Color.GRAY);
+            for (int i=0;i<25-mpRatio;i++) {
+                terminal.write("-",54+mpRatio+i,4,Color.GRAY);
             }
         }
-        terminal.write("Str|" + player.getStr(),51,5);
-        terminal.write("Con|" + player.getCon(),58,5);
-        terminal.write("Dex|" + player.getDex(),65,5);
-        terminal.write("Int|" + player.getInt(),72,5);
+        terminal.write("Atk|" + player.getAtk(),51,5);
+        terminal.write("Dmg|" + player.getDmg(),58,5);
+        terminal.write("Eva|" + player.getEva(),65,5);
+        terminal.write("Def|" + player.getDef(),72,5);
 
     }
     

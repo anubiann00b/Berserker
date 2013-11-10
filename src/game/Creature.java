@@ -10,71 +10,27 @@ public class Creature {
     private int currentHp;
     private int maxMp;
     private int currentMp;
-    private int statStr;
-    private int statDex;
-    private int statInt;
-    private int statCon;
-    private int attack;
-    private int damage;
-    private int defense;
-    private int evasion;
-    private int deflect;
-    private int parry;
-    private int block;
+    private int atk;
+    private int dmg;
+    private int eva;
+    private int def;
     private char glyph;
     private World world;
     private Color color;
     private CreatureAi ai;
     private int visionRadius;
     protected ArrayList<String> messages = new ArrayList();
-    
-    public Creature(World world, char glyph, Color color) {
-        this.world = world;
-        this.glyph = glyph;
-        this.color = color;
-        this.visionRadius = 9;
-    }
-    
-    public Creature(World world, char glyph, Color color, int maxHp) {
-        this.world = world;
-        this.glyph = glyph;
-        this.color = color;
-        this.maxHp = maxHp;
-        this.currentHp = maxHp;
-        this.visionRadius = 9;
-    }
-    
-    public Creature(World world, char glyph, Color color, int maxHp, int maxMp) {
-        this.world = world;
-        this.glyph = glyph;
-        this.color = color;
+    //protected ArrayList<Items> inventory = new ArrayList();
+
+    Creature(World world, char glyph, Color color, int maxHp, int maxMp) {
+        this.world=world;
+        this.glyph=glyph;
+        this.color=color;
         this.maxHp = maxHp;
         this.currentHp = maxHp;
         this.maxMp = maxMp;
         this.currentMp = maxMp;
         this.visionRadius = 9;
-    }    
-    
-    public Creature(World world, char glyph, Color color, int statStr, int statDex, int statInt, int statCon) {
-        this.world = world;
-        this.glyph = glyph;
-        this.color = color;
-        this.maxHp = statCon+10;
-        this.currentHp = this.maxHp;
-        this.maxMp = statInt+2;
-        this.currentMp = this.maxMp;
-        this.statStr = statStr;
-        this.statDex = statDex;
-        this.statInt = statInt;
-        this.statCon = statCon;
-        this.attack = statStr/3 + statDex;
-        this.damage = statStr + statDex/5;
-        this.evasion = statDex+2;
-        this.block = statStr/2 + statCon/2;
-        this.deflect = statStr/5 + statDex;
-        this.parry = statDex;
-        this.visionRadius = 9;
-        this.addMessage("You have spawned!");
     }
     
     public void moveBy(int mx, int my) {
@@ -98,19 +54,11 @@ public class Creature {
     public int getMaxMp() { return this.maxMp; }  
     public int getX() { return this.x; }    
     public int getY() { return this.y; }
-    
-    public int getStr() { return this.statStr; }    
-    public int getDex() { return this.statDex; }    
-    public int getInt() { return this.statInt; }    
-    public int getCon() { return this.statCon; }    
-    public int getAttack() { return this.attack; }    
-    public int getDamage() { return this.damage; }    
-    public int getEvasion() { return this.evasion; }
-    public int getBlock() { return this.block; }    
-    public int getDeflect() { return this.deflect; }    
-    public int getParry() { return this.parry; }    
-
-
+      
+    public int getAtk() { return this.atk; }    
+    public int getDmg() { return this.dmg; }    
+    public int getEva() { return this.eva; }   
+    public int getDef() { return this.def; }
     public void setCreatureAi(CreatureAi ai) { this.ai = ai; }
         
     public void setX(int x) { this.x = x; }    
@@ -125,5 +73,4 @@ public class Creature {
     public void addMessage(String message) {
         messages.add(message);
     }
-
 }

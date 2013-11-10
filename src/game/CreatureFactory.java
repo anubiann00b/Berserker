@@ -10,7 +10,7 @@ public class CreatureFactory {
     }
     
     public Creature newPlayer(FieldOfView fov) {
-        Creature player = new Creature(world, '@', AsciiPanel.brightWhite,5,5,5,5);
+        Creature player = new Creature(world, '@', AsciiPanel.brightWhite,20,10);
         world.addAtEmptyLocation(player);
         new PlayerAi(player, fov);
         return player;

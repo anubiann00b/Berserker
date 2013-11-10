@@ -6,10 +6,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import game.screens.*;
 import java.awt.Color;
-//import java.awt.image.BufferedImage;
-//import java.io.IOException;
-//import javax.imageio.ImageIO;
-//import javax.swing.ImageIcon;
 
 public class ApplicationMain extends JFrame implements KeyListener {
     
@@ -47,18 +43,5 @@ public class ApplicationMain extends JFrame implements KeyListener {
         app.setVisible(true);
         app.setBackground(Color.black);
         app.setTitle("CrawleR 0.0.0");
-        /*ImageIcon img = new ImageIcon("icon.png");
-        app.setIconImage(img.getImage());*/
-        
-        /*BufferedImage image = null;
-        try {
-            image = ImageIO.read(
-                app.getClass().getResource("/icon.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        app.setIconImage(image);*/
-
-        //app.setResizable(false);
     }
 }
