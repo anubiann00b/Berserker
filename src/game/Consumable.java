@@ -3,7 +3,7 @@ package game;
 public enum Consumable {
     FIRE     ("Potion of Fire",      Status.BURN,    5),
     CHILL    ("Potion of Chill",     Status.FREEZE,  5),
-    Poison   ("Potion of Poison",    Status.POISON,  3),
+    POISON   ("Potion of Poison",    Status.POISON,  3),
     CONFUSION("Potion of Confusion", Status.CONFUSE, 6),
     WEAKNESS ("Potion of Weakness",  Status.WEAKEN,  5),
     STRENGTH ("Potion of Strength",  Status.BUFF,    6),
