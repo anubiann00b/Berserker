@@ -1,16 +1,16 @@
 package game;
 
 public enum Consumable {
-    FIRE("Potion of Fire", Status.BURN, 5),
-    CHILL("Potion of Chill", Status.FREEZE, 5),
-    Poison("Potion of Poison", Status.POISON, 3),
+    FIRE     ("Potion of Fire",      Status.BURN,    5),
+    CHILL    ("Potion of Chill",     Status.FREEZE,  5),
+    Poison   ("Potion of Poison",    Status.POISON,  3),
     CONFUSION("Potion of Confusion", Status.CONFUSE, 6),
-    WEAKNESS("Potion of Weakness", Status.WEAKEN, 5),
-    STRENGTH("Potion of Strength", Status.BUFF, 6),
-    BERSERK("Potion of Berserk", Status.BERSERK, 6),
-    //CURE("Potion of Cure", Status.HEAL, 1),
-    HEALING("Potion of Healing", Status.HEAL, 1),
-    ROT("Potion of Rot", Status.ROT, 9);
+    WEAKNESS ("Potion of Weakness",  Status.WEAKEN,  5),
+    STRENGTH ("Potion of Strength",  Status.BUFF,    6),
+    BERSERK  ("Potion of Berserk",   Status.BERSERK, 6),
+    //CURE   ("Potion of Cure",      Status.HEAL,     1),
+    HEALING  ("Potion of Healing",   Status.HEAL,    1),
+    ROT      ("Potion of Rot",       Status.ROT,     9);
     
      private String name;
     public String getName() { return name; }
