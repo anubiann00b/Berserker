@@ -12,9 +12,8 @@ public class Item {
     private static final double BRAND_CHANCE = 0.10;
     private static final int NUMBER_OF_EQUIPABLES = Equipable.values().length;
 
-    public Equipable getType() {
-        return type;
-    }
+    public Equipable getTypeOfEquipable() { return type; }
+    public Brand getBrand() { return brand; }
     
     public Item() {
         this.type = generateType();

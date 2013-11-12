@@ -26,8 +26,7 @@ public class CreatureFactory {
     public Creature newKobold(FieldOfView fov, Creature player) {
         Creature kobold = new Creature("kobold", world,'K',AsciiPanel.brightRed,15,0,3);
         do { world.addAtEmptyLocation(kobold); }
-        while (((kobold.getX()-player.getX())*(kobold.getX()-player.getX())+(kobold.getX()-player.getX())*(kobold.getX()-player.getX()))<81);
-        
+        while (Math.pow(kobold.getX()-player.getX(),2)+Math.pow(kobold.getY()-player.getY(),2)<81);
         new KoboldAi(kobold, player);
         return kobold;
     }

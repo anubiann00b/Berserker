@@ -21,15 +21,10 @@ public class Creature {
     private CreatureAi ai;
     private int visionRadius;
     private boolean isEvil = true;
-    protected ArrayList<String> messages = new ArrayList();
-    //protected ArrayList<Item> inventory = new ArrayList();
     private Item weapon;
-    public Item getWeapon() { return this.weapon; }
     private Item shield;
-    public Item getShield() { return this.shield; }
     private Item armor;
-    public Item getArmor() { return this.armor; }
-
+    protected ArrayList<String> messages = new ArrayList();
     protected ArrayList<Status> statuses = new ArrayList();
 
     Creature(String name, World world, char glyph, Color color, int maxHp, int maxRp, int baseStats) {
@@ -48,6 +43,7 @@ public class Creature {
         def = baseStats;
         isEvil = true;
     }
+    
     Creature(String name, World world, char glyph, Color color, int maxHp, int maxRp, int baseStats, boolean isEvil) {
         this.name = name;
         this.world = world;
@@ -68,50 +64,80 @@ public class Creature {
         this.shield = new Item(Equipable.LONGSLEEVES, 0);
     }
     
+    public int getX() { return this.x; }    
+    public int getY() { return this.y; }
+    public int getCurrentHp() { return this.currentHp; }    
+    public int getMaxHp() { return this.maxHp; }    
+    public int getCurrentRp() { return this.currentRp; }    
+    public int getMaxRp() { return this.maxRp; }
+    public int getAtk() { return this.atk; }    
+    public int getDmg() { return this.dmg; }    
+    public int getEva() { return this.eva; }   
+    public int getDef() { return this.def; }
+    public int getVisionRadius() { return visionRadius; }
+    public char getGlyph() { return glyph; }
+    public String getName() { return this.name; }
+    public Color getColor() { return color; }
+    public Item getWeapon() { return this.weapon; }
+    public Item getShield() { return this.shield; }
+    public Item getArmor() { return this.armor; }
+    public boolean isEvil() { return this.isEvil; }
+    public ArrayList<String> getMessages() { return ai.getMessages(); }
+
+    public Tile getTile(int x, int y) { return world.tile(x, y); }
+    public Creature getCreature(int x, int y) { return world.getCreature(x, y); }
+
+    public void setX(int x) { this.x = x; }    
+    public void setY(int y) { this.y = y; }
+    public void setAtk(int atk) { this.atk += atk; }    
+    public void setDmg(int dmg) { this.dmg += dmg; }
+    public void setEva(int eva) { this.eva += eva; }    
+    public void setDef(int def) { this.def += def; }
+    public void setHp(int health) { this.currentHp = Math.min(0,Math.min(currentHp+health,maxHp)); }
+    public void setRp(int rage) { if(currentRp+rage>=0 && currentRp+rage<=maxRp) {this.currentRp += rage; setAtk(rage); setDmg(rage);} }
+    public void setCreatureAi(CreatureAi ai) { this.ai = ai; }
+
+    public void addMessage(String message) { messages.add(message); }
+    
+    public void update() { ai.update(); }
+    public void dealDamage(int damage) { setHp(Math.min(-damage,-1)); }
+    public boolean canSee(int wx, int wy) { return ai.canSee(wx, wy); }
     
     public void pickUp()
     {
         GroundedItem item = world.getItem(x, y);
+        GroundedItem newItemDropped = null;
         if (item == null) {
             addMessage("You sucessfully pick up nothing!");
-            return;
-        }
-        if (item.getItem().getType().getType() == 0) {
-            this.atk -= this.weapon.getType().getAttack();
-            this.dmg -= this.weapon.getType().getDamage();
-            addMessage(this.weapon.getType().getName() + " dropped.");
-            GroundedItem newItem = new GroundedItem(this.weapon, x, y);
+        } else {
+            if (item.getItem().getTypeOfEquipable().getTypeOfItem() == 0) {
+                this.atk -= this.weapon.getTypeOfEquipable().getAttack();
+                this.dmg -= this.weapon.getTypeOfEquipable().getDamage();
+                addMessage(this.weapon.getTypeOfEquipable().getName() + " dropped.");
+                newItemDropped = new GroundedItem(this.weapon, x, y);
+                this.weapon = item.getItem();
+                this.atk += this.weapon.getTypeOfEquipable().getAttack();
+                this.dmg += this.weapon.getTypeOfEquipable().getDamage();
+            } else if (item.getItem().getTypeOfEquipable().getTypeOfItem() == 1) {
+                this.def -= this.armor.getTypeOfEquipable().getDefense();
+                this.eva -= this.armor.getTypeOfEquipable().getEvasion();
+                addMessage(this.armor.getTypeOfEquipable().getName() + " dropped.");
+                newItemDropped = new GroundedItem(this.armor, x, y);
+                this.armor = item.getItem();
+                this.def += this.armor.getTypeOfEquipable().getDefense();
+                this.eva += this.armor.getTypeOfEquipable().getEvasion();
+            } else if (item.getItem().getTypeOfEquipable().getTypeOfItem() == 2) {
+                this.def -= this.shield.getTypeOfEquipable().getDefense();
+                this.eva -= this.shield.getTypeOfEquipable().getEvasion();
+                addMessage(this.shield.getTypeOfEquipable().getName() + " dropped.");
+                newItemDropped = new GroundedItem(this.shield, x, y);
+                this.shield = item.getItem();
+                this.def += this.shield.getTypeOfEquipable().getDefense();
+                this.eva += this.shield.getTypeOfEquipable().getEvasion();
+            }
             world.remove(item);
-            this.weapon = item.getItem();
-            addMessage(item.getItem().getType().getName() + " equipped.");
-            this.atk += this.weapon.getType().getAttack();
-            this.dmg += this.weapon.getType().getDamage();
-            world.setItem(newItem);
-        }
-        else if (item.getItem().getType().getType() == 1) {
-            this.def -= this.armor.getType().getDefense();
-            this.eva -= this.armor.getType().getEvasion();
-            addMessage(this.armor.getType().getName() + " dropped.");
-            GroundedItem newItem = new GroundedItem(this.armor, x, y);
-            world.remove(item);
-            this.armor = item.getItem();
-            addMessage(item.getItem().getType().getName() + " equipped.");
-            this.def += this.armor.getType().getDefense();
-            this.eva += this.armor.getType().getEvasion();
-            world.setItem(newItem);
-        }
-        else if (item.getItem().getType().getType() == 2) {
-            this.def -= this.shield.getType().getDefense();
-            this.eva -= this.shield.getType().getEvasion();
-            addMessage(this.shield.getType().getName() + " dropped.");
-            GroundedItem newItem = new GroundedItem(this.shield, x, y);
-            world.setItem(newItem);
-            world.remove(item);
-            this.shield = item.getItem();
-            addMessage(item.getItem().getType().getName() + " equipped.");
-            this.def += this.shield.getType().getDefense();
-            this.eva += this.shield.getType().getEvasion();
-            world.setItem(newItem);
+            addMessage(item.getItem().getTypeOfEquipable().getName() + " equipped.");
+            world.setItem(newItemDropped);
         }
     }
     
@@ -125,58 +151,8 @@ public class Creature {
             attack(other);
         }
         if (item != null) {
-            addMessage("You find a " + item.getItem().getType().getName() + ".");
+            addMessage("You find a " + item.getItem().getTypeOfEquipable().getName() + ".");
         }
-    }
-    
-    public boolean isEvil() { return this.isEvil; }
-    public boolean canSee(int wx, int wy) { return ai.canSee(wx, wy); }
-    public Tile getTile(int x, int y) { return world.tile(x, y); }
-    public Creature getCreature(int x, int y) { return world.getCreature(x, y); }
-    public String getName() { return this.name; }
-    public int getVisionRadius() { return visionRadius; }
-    public Color getColor() { return color; }
-    public char getGlyph() { return glyph; }
-    public int getCurrentHp() { return this.currentHp; }    
-    public int getMaxHp() { return this.maxHp; }    
-    public int getCurrentRp() { return this.currentRp; }    
-    public int getMaxRp() { return this.maxRp; }  
-    public int getX() { return this.x; }    
-    public int getY() { return this.y; }
-    public int getAtk() { return this.atk; }    
-    public int getDmg() { return this.dmg; }    
-    public int getEva() { return this.eva; }   
-    public int getDef() { return this.def; }
-    public void setAtk(int atk) { this.atk += atk; }    
-    public void setDmg(int dmg) { this.dmg += dmg; }
-    public void setEva(int eva) { this.eva += eva; }    
-    public void setDef(int def) { this.def += def; }
-    public void setCreatureAi(CreatureAi ai) { this.ai = ai; }
-        
-    public void setX(int x) { this.x = x; }    
-    public void setY(int y) { this.y = y; }
-    public void setHp(int health) {
-        this.currentHp += health;
-        if(currentHp<0)
-            currentHp=0;
-        if(currentHp>maxHp)
-            currentHp=maxHp;
-    }
-    
-    public void setRp(int rage) {
-        if(currentRp+rage>=0 && currentRp+rage<=maxRp) {
-            this.currentRp += rage;
-            setAtk(rage);
-            setDmg(rage);
-        }
-    }
-
-    public ArrayList<String> getMessages() {
-        return ai.getMessages();
-    }
-    
-    public void addMessage(String message) {
-        messages.add(message);
     }
 
     private void attack(Creature other) {
@@ -231,18 +207,6 @@ public class Creature {
             addMessage("The " + other.getName() + " dies!");
             setRp(1);
             setHp(1);
-        }
-    }
-
-    public void update() {
-        ai.update();
-    }
-
-    public void dealDamage(int damage) {
-        if (damage < 1) {
-            setHp(-1);
-        } else {
-            setHp(-damage);
         }
     }
 }
