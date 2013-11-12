@@ -15,12 +15,12 @@ public class PlayScreen implements Screen {
     private int mapHeight;
     private Creature player;
     private FieldOfView fov;
-    private ArrayList<String> messages;
+    private ArrayList<Message> messages;
     private CreatureFactory creatureFactory;
 
     public PlayScreen() {
         messages = new ArrayList();
-        messages.add("Game Started!");
+        messages.add(Message.getConvertedMessage("Game Started!"));
         screenWidth = 40;
         screenHeight = 14;
         mapWidth = 200;
@@ -162,7 +162,7 @@ public class PlayScreen implements Screen {
     }
     
     public void displayMessages(AsciiPanel terminal) {
-        ArrayList<String> newMessages = player.getMessages();
+        ArrayList<Message> newMessages = player.getMessages();
         Collections.reverse(newMessages);
         newMessages.addAll(messages);
         messages = newMessages;
@@ -172,8 +172,12 @@ public class PlayScreen implements Screen {
             }
         }
         for (int i=0;i<messages.size();i++) {
-            String message = messages.get(i);
-            terminal.write(message,1,23-i);
+            Message message = messages.get(i);
+            for(int j=0;j<message.getLength();j++) {
+                ColoredChar test1 = message.getCharacter(j);
+                char test2 = test1.getChar();
+                terminal.write(message.getCharacter(j).getChar(),1+j,23-j,message.getCharacter(i).getColor());
+            }
         }
     }
 }

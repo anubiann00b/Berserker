@@ -1,6 +1,8 @@
 package game;
 
 import java.awt.Color;
+import asciiPanel.AsciiPanel;
+import game.ColoredChar;
 
 public class Message {
     private ColoredChar[] characters = new ColoredChar[80];
@@ -9,16 +11,22 @@ public class Message {
         this.characters = characters;
     }
     
-    public Message convert(String input, Color color) {
-        Message newMessage = new Message (characters);
-        for (int i = 0; i < 80; i++) {
-            characters[i].convert(input.charAt(i), color);
+    public static Message getConvertedMessage(String input, Color color) {
+        ColoredChar[] newMessage = new ColoredChar[80];
+        for (int i=0;i<input.length();i++) {
+            newMessage[i] = ColoredChar.getConvertedChar(input.charAt(i), color);
         }
-        
-        return newMessage;
-        
-        //returns a message object of string in the color color
+        return new Message(newMessage);
     }
+    
+    public static Message getConvertedMessage(String input) {
+        return getConvertedMessage(input,AsciiPanel.white);
+    }
+
     public ColoredChar[] getMessage() { return characters; }
+    public ColoredChar getCharacter(int index) { return characters[index]; }
+    public int getLength() { return characters.length; }
+    
+    public void setCharacter(ColoredChar character, int index) { characters[index] = character; }
     public void setMessage(ColoredChar[] characters) { this.characters = characters; }
 }

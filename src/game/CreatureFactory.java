@@ -12,7 +12,7 @@ public class CreatureFactory {
     public Creature newPlayer(FieldOfView fov) {
         Creature player = new Creature("you", world,'@',AsciiPanel.brightWhite,10,10,5, false);
         world.addAtEmptyLocation(player);
-        new PlayerAi(player, fov);
+        new PlayerAi(player, fov); //This makes the creature class simpler
         return player;
     }
     

@@ -35,8 +35,8 @@ public class PlayerAi extends CreatureAi {
         }
     }
     
-    public ArrayList<String> getMessages() {
-        ArrayList<String> theMessages = new ArrayList();
+    public ArrayList<Message> getMessages() {
+        ArrayList<Message> theMessages = new ArrayList();
         theMessages.addAll(creature.messages);
         creature.messages.clear();
         return theMessages;

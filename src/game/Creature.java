@@ -24,7 +24,7 @@ public class Creature {
     private Item weapon;
     private Item shield;
     private Item armor;
-    protected ArrayList<String> messages = new ArrayList();
+    protected ArrayList<Message> messages = new ArrayList();
     protected ArrayList<Status> statuses = new ArrayList();
 
     Creature(String name, World world, char glyph, Color color, int maxHp, int maxRp, int baseStats) {
@@ -82,7 +82,7 @@ public class Creature {
     public Item getShield() { return this.shield; }
     public Item getArmor() { return this.armor; }
     public boolean isEvil() { return this.isEvil; }
-    public ArrayList<String> getMessages() { return ai.getMessages(); }
+    public ArrayList<Message> getMessages() { return ai.getMessages(); }
 
     public Tile getTile(int x, int y) { return world.tile(x, y); }
     public Creature getCreature(int x, int y) { return world.getCreature(x, y); }
@@ -97,7 +97,8 @@ public class Creature {
     public void setRp(int rage) { if(currentRp+rage>=0 && currentRp+rage<=maxRp) {this.currentRp += rage; setAtk(rage); setDmg(rage);} }
     public void setCreatureAi(CreatureAi ai) { this.ai = ai; }
 
-    public void addMessage(String message) { messages.add(message); }
+    public void addMessage(String message) { messages.add(Message.getConvertedMessage(message)); }
+    public void addMessage(String message, Color color) { messages.add(Message.getConvertedMessage(message,color)); }
     
     public void update() { ai.update(); }
     public void dealDamage(int damage) { setHp(Math.min(-damage,-1)); }

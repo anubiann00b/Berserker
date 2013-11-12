@@ -25,7 +25,7 @@ public class CreatureAi {
         return true;
     }
 
-    public ArrayList<String> getMessages() {
+    public ArrayList<Message> getMessages() {
         return null;
     }
     
