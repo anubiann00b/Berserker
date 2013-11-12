@@ -93,7 +93,7 @@ public class Creature {
     public void setDmg(int dmg) { this.dmg += dmg; }
     public void setEva(int eva) { this.eva += eva; }    
     public void setDef(int def) { this.def += def; }
-    public void setHp(int health) { this.currentHp = Math.min(0,Math.min(currentHp+health,maxHp)); }
+    public void setHp(int health) { this.currentHp = Math.max(0,Math.min(currentHp+health,maxHp)); }
     public void setRp(int rage) { if(currentRp+rage>=0 && currentRp+rage<=maxRp) {this.currentRp += rage; setAtk(rage); setDmg(rage);} }
     public void setCreatureAi(CreatureAi ai) { this.ai = ai; }
 
