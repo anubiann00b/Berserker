@@ -205,15 +205,15 @@ public class Creature {
         } else {
             double r = Math.random();
             if (r<0.2)
-                addMessage(m.get(5)+" the "+other.getName()+".");
+                addMessage(Message.getConvertedMessage(m.get(5).getString()+" the "+other.getName()+".",AsciiPanel.red));
             else if (r<0.4)
-                addMessage(m.get(6)+" the "+other.getName()+".");
+                addMessage(Message.getConvertedMessage(m.get(6).getString()+" the "+other.getName()+".",AsciiPanel.red));
             else if (r<0.6)
-                addMessage(m.get(7)+" the "+other.getName()+".");
+                addMessage(Message.getConvertedMessage(m.get(7).getString()+" the "+other.getName()+".",AsciiPanel.red));
             else if (r<0.8)
-                addMessage(m.get(8)+" the "+other.getName()+".");
+                addMessage(Message.getConvertedMessage(m.get(8).getString()+" the "+other.getName()+".",AsciiPanel.red));
             else if (r<1)
-                addMessage(m.get(9)+" the "+other.getName()+".");
+                addMessage(Message.getConvertedMessage(m.get(9).getString()+" the "+other.getName()+".",AsciiPanel.red));
             addMessage("You strike the " + other.getName() + ".");
             other.dealDamage(dmg-other.def+dmgRoll);
             setRp(1);
