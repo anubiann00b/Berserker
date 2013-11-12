@@ -12,17 +12,17 @@ public class Item {
     private static final double BRAND_CHANCE = 0.10;
     private static final int NUMBER_OF_EQUIPABLES = Equipable.values().length;
 
-    public Equipable getTypeOfEquipable() { return type; }
+    public Equipable getEquipable() { return type; }
     public Brand getBrand() { return brand; }
     
     public Item() {
         this.type = generateType();
         this.brand = generateBrand();
         this.name = this.type.getName();
-        this.atk = this.type.getAttack() + brand.getAtk();
-        this.dmg = this.type.getDefense() + brand.getDef();
-        this.eva = this.type.getEvasion() + brand.getEva();
-        this.def = this.type.getDefense() + brand.getDmg();
+        this.atk = this.type.getAtk() + brand.getAtk();
+        this.dmg = this.type.getDef() + brand.getDef();
+        this.eva = this.type.getEva() + brand.getEva();
+        this.def = this.type.getDef() + brand.getDmg();
     }
     
     public Item(Equipable type, int enchant) {
@@ -32,10 +32,10 @@ public class Item {
     public Item(Equipable type, Brand brand, int enchant) {
         this.name = type.getName();
         this.type = type;
-        this.atk = type.getAttack();
-        this.dmg = type.getDamage();
-        this.eva = type.getEvasion();
-        this.def = type.getDefense();
+        this.atk = type.getAtk();
+        this.dmg = type.getDmg();
+        this.eva = type.getEva();
+        this.def = type.getDef();
         this.brand = brand;
     }
 

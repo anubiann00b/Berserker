@@ -84,7 +84,7 @@ public class PlayScreen implements Screen {
                     if (creature != null) {
                         terminal.write(creature.getGlyph(), creature.getX() - left + 1, creature.getY() - top + 1, creature.getColor());
                     } else if (item != null) {
-                        terminal.write(item.getItem().getTypeOfEquipable().getGlyph(), item.getX() - left + 1, item.getY() - top + 1, item.getItem().getTypeOfEquipable().getColor());
+                        terminal.write(item.getItem().getEquipable().getGlyph(), item.getX() - left + 1, item.getY() - top + 1, item.getItem().getEquipable().getColor());
                     }
                 } else {
                     terminal.write(fov.tile(wx, wy).glyph(), x + 1, y + 1, Color.DARK_GRAY);
@@ -155,9 +155,9 @@ public class PlayScreen implements Screen {
         terminal.write("Dmg|" + player.getDmg(),51,5);
         terminal.write("Eva|" + player.getEva(),60,5);
         terminal.write("Def|" + player.getDef(),69,5);
-        terminal.write("Weapon : " + player.getWeapon().getTypeOfEquipable().getName(),42,7);
-        terminal.write("Armor  : " + player.getArmor().getTypeOfEquipable().getName(),42,8);
-        terminal.write("Shield : " + player.getShield().getTypeOfEquipable().getName(),42,9);
+        terminal.write("Weapon : " + player.getWeapon().getEquipable().getName(),42,7);
+        terminal.write("Armor  : " + player.getArmor().getEquipable().getName(),42,8);
+        terminal.write("Shield : " + player.getShield().getEquipable().getName(),42,9);
         terminal.write("Kills: " + world.getKillCount(),42,11);
     }
     
