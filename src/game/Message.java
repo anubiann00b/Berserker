@@ -24,7 +24,7 @@ public class Message {
     }
 
     public ColoredChar[] getMessage() { return characters; }
-    public ColoredChar getCharacter(int index) { return characters[index]; }
+    public ColoredChar getCharacter(int index) { if(characters[index]!=null) return characters[index]; return null;}
     public int getLength() { return characters.length; }
     
     public void setCharacter(ColoredChar character, int index) { characters[index] = character; }

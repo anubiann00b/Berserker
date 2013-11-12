@@ -174,9 +174,9 @@ public class PlayScreen implements Screen {
         for (int i=0;i<messages.size();i++) {
             Message message = messages.get(i);
             for(int j=0;j<message.getLength();j++) {
-                ColoredChar test1 = message.getCharacter(j);
-                char test2 = test1.getChar();
-                terminal.write(message.getCharacter(j).getChar(),1+j,23-j,message.getCharacter(i).getColor());
+                if (message.getCharacter(j)==null)
+                    break;
+                terminal.write(message.getCharacter(j).getChar(),1+j,23-i,message.getCharacter(i).getColor());
             }
         }
     }

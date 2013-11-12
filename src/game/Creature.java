@@ -1,7 +1,9 @@
 package game;
 
+import asciiPanel.AsciiPanel;
 import java.awt.Color;
 import java.util.ArrayList;
+import game.*;
 
 public class Creature {
     private int x;
@@ -26,7 +28,8 @@ public class Creature {
     private Item armor;
     protected ArrayList<Message> messages = new ArrayList();
     protected ArrayList<Status> statuses = new ArrayList();
-
+    private ArrayList<Message> m = new ArrayList();
+    
     Creature(String name, World world, char glyph, Color color, int maxHp, int maxRp, int baseStats) {
         this.name = name;
         this.world = world;
@@ -59,7 +62,7 @@ public class Creature {
         dmg = baseStats;
         eva = baseStats;
         def = baseStats;
-        this.weapon = new Item(Equipable.MAUL, 0);
+        this.weapon = new Item(Equipable.STICK, 0);
         this.armor = new Item(Equipable.SHIRT, 0);
         this.shield = new Item(Equipable.LONGSLEEVES, 0);
     }
@@ -97,6 +100,7 @@ public class Creature {
     public void setRp(int rage) { if(currentRp+rage>=0 && currentRp+rage<=maxRp) {this.currentRp += rage; setAtk(rage); setDmg(rage);} }
     public void setCreatureAi(CreatureAi ai) { this.ai = ai; }
 
+    public void addMessage(Message message) { messages.add(message); }
     public void addMessage(String message) { messages.add(Message.getConvertedMessage(message)); }
     public void addMessage(String message, Color color) { messages.add(Message.getConvertedMessage(message,color)); }
     
@@ -162,15 +166,15 @@ public class Creature {
         if (atkRoll >= 20) {
             double r = Math.random();
             if (r<0.2)
-                addMessage("Your weapon bestows your rage upon your victims!");
+                addMessage(m.get(0));
             else if (r<0.4)
-                addMessage("You skewer the pathetic creature!");
+                addMessage(m.get(1));
             else if (r<0.6)
-                addMessage("You just manage to pull of a devasting attack!");
+                addMessage(m.get(2));
             else if (r<0.8)
-                addMessage("Your grandpa's flawless technique shows off in your strike!");
+                addMessage(m.get(3));
             else if (r<1)
-                addMessage("YOU IMPALE THE LITTLE INSECT");
+                addMessage(m.get(4));
             other.dealDamage((dmg+5)*2-other.def);
             setRp(3);
         } else if (atkRoll <= 1) {
@@ -199,6 +203,17 @@ public class Creature {
             else if (r<1)
                 addMessage("You must study more.");
         } else {
+            double r = Math.random();
+            if (r<0.2)
+                addMessage(m.get(5)+" the "+other.getName()+".");
+            else if (r<0.4)
+                addMessage(m.get(6)+" the "+other.getName()+".");
+            else if (r<0.6)
+                addMessage(m.get(7)+" the "+other.getName()+".");
+            else if (r<0.8)
+                addMessage(m.get(8)+" the "+other.getName()+".");
+            else if (r<1)
+                addMessage(m.get(9)+" the "+other.getName()+".");
             addMessage("You strike the " + other.getName() + ".");
             other.dealDamage(dmg-other.def+dmgRoll);
             setRp(1);
@@ -209,5 +224,9 @@ public class Creature {
             setRp(1);
             setHp(1);
         }
+    }
+    
+    protected void getMessageList(ArrayList<Message> m) {
+        this.m.addAll(m);
     }
 }
