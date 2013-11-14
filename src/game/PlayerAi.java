@@ -1,7 +1,7 @@
 package game;
 
 import asciiPanel.AsciiPanel;
-import game.screens.*;
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class PlayerAi extends CreatureAi {
@@ -10,7 +10,6 @@ public class PlayerAi extends CreatureAi {
     public PlayerAi(Creature creature, FieldOfView fov) {
         super(creature);
         this.fov = fov;
-        creature.getMessageList(initializeMessageList());
     }
     
     public boolean canSee(int wx, int wy) {
@@ -44,33 +43,59 @@ public class PlayerAi extends CreatureAi {
         return theMessages;
     }
     
-    public ArrayList<Message> initializeMessageList() {
-        ArrayList<Message> m = new ArrayList<Message>();
-            // Critical hit messages
-            m.add(new Message("Your weapon bestows your rage upon your victims!",AsciiPanel.brightRed));
-            m.add(new Message("You skewer the pathetic creature!",AsciiPanel.brightRed));
-            m.add(new Message("You pull of a devasting attack!",AsciiPanel.brightRed));
-            m.add(new Message("Your grandpa's secret technique passsed on through the generations hits!",AsciiPanel.brightRed));
-            m.add(new Message("YOU IMPALE THE LITTLE INSECT",AsciiPanel.brightRed));
-            
-            // Hit messages
-            m.add(new Message("You hit",AsciiPanel.red));
-            m.add(new Message("You strike",AsciiPanel.red));
-            m.add(new Message("You swing at",AsciiPanel.red));
-            m.add(new Message("You smack",AsciiPanel.red));
-            m.add(new Message("You clobber",AsciiPanel.red));
-            /*
-            m.add(Message.getConvertedMessage("",AsciiPanel.));
-            m.add(Message.getConvertedMessage("",AsciiPanel.));
-            m.add(Message.getConvertedMessage("",AsciiPanel.));
-            m.add(Message.getConvertedMessage("",AsciiPanel.));
-            m.add(Message.getConvertedMessage("",AsciiPanel.));
-
-            m.add(Message.getConvertedMessage("",AsciiPanel.));
-            m.add(Message.getConvertedMessage("",AsciiPanel.));
-            m.add(Message.getConvertedMessage("",AsciiPanel.));
-            m.add(Message.getConvertedMessage("",AsciiPanel.));
-            m.add(Message.getConvertedMessage("",AsciiPanel.));*/
-        return m;
+    protected void addCritMessage(Creature other) {
+        double r = Math.random();
+        if (r<0.2)
+            creature.addMessage("Your weapon bestows your rage upon your victims!", AsciiPanel.brightRed);
+        else if (r<0.4)
+            creature.addMessage("You skewer the pathetic creature!",AsciiPanel.brightRed);
+        else if (r<0.6)
+            creature.addMessage("You pull of a devasting attack!",AsciiPanel.brightRed);
+        else if (r<0.8)
+            creature.addMessage("Your grandpa's secret technique passsed on through the generations hits!",AsciiPanel.brightRed);
+        else if (r<1)
+            creature.addMessage("YOU IMPALE THE LITTLE INSECT",AsciiPanel.brightRed);
+    }
+    
+    protected void addCritMissMessage(Creature other) {
+        double r = Math.random();
+        if (r<0.2)
+            creature.addMessage("You are very MISS-leading in your combat ability.");
+        else if (r<0.4)
+            creature.addMessage("Even a baby could of hit that.");
+        else if (r<0.6)
+            creature.addMessage("You get an A for effort.");
+        else if (r<0.8)
+            creature.addMessage("Who taught you to fight, your grandpa?");
+        else if (r<1)
+            creature.addMessage("YOU SHAME YOUR FAMILY");
+    }
+    
+    protected void addMissMessage(Creature other) {
+        double r = Math.random();
+        if (r<0.2)
+            creature.addMessage("Your weapon barely grazes it. Try harder.", Color.WHITE);
+        else if (r<0.4)
+            creature.addMessage("You miss.", Color.WHITE);
+        else if (r<0.6)
+            creature.addMessage("You missed. Better luck next time!", Color.WHITE);
+        else if (r<0.8)
+            creature.addMessage("Maybe you should train harder.", Color.WHITE);
+        else if (r<1)
+            creature.addMessage("You must study more.", Color.WHITE);
+    }
+    
+    protected void addHitMessage(Creature other) {
+        double r = Math.random();
+        if (r<0.2)
+            creature.addMessage("You hit the " + other.getName() + ".", AsciiPanel.red);
+        else if (r<0.4)
+            creature.addMessage("You strike the " + other.getName() + ".", AsciiPanel.red);
+        else if (r<0.6)
+            creature.addMessage("You swing at the " + other.getName() + ".", AsciiPanel.red);
+        else if (r<0.8)
+            creature.addMessage("You smack the " + other.getName() + ".", AsciiPanel.red);
+        else if (r<1)
+            creature.addMessage("You clobber the " + other.getName() + ".", AsciiPanel.red);
     }
 }

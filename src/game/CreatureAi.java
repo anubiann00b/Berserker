@@ -41,6 +41,9 @@ public class CreatureAi {
         creature.moveBy(mx, my);
     }
 
-    protected void update() {
-    }
+    protected void update() { }
+    protected void addCritMessage(Creature other) { }
+    protected void addCritMissMessage(Creature other) { }
+    protected void addMissMessage(Creature other) { }
+    protected void addHitMessage(Creature other) { }
 }

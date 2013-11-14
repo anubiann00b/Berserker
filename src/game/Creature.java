@@ -3,7 +3,6 @@ package game;
 import asciiPanel.AsciiPanel;
 import java.awt.Color;
 import java.util.ArrayList;
-import game.*;
 
 public class Creature {
     private int x;
@@ -16,10 +15,10 @@ public class Creature {
     private int dmg;
     private int eva;
     private int def;
-    private char glyph;
-    private String name;
+    private final char glyph;
+    private final String name;
+    private final Color color;
     private World world;
-    private Color color;
     private CreatureAi ai;
     private int visionRadius;
     private boolean isEvil = true;
@@ -164,56 +163,16 @@ public class Creature {
         int atkRoll = (int) Math.floor(Math.random()*20) + 1;
         int dmgRoll = (int) Math.floor(Math.random()*5) + 1;
         if (atkRoll >= 20) {
-            double r = Math.random();
-            if (r<0.2)
-                addMessage("Your weapon bestows your rage upon your victims!", AsciiPanel.brightRed);
-            else if (r<0.4)
-                addMessage("You skewer the pathetic creature!",AsciiPanel.brightRed);
-            else if (r<0.6)
-                addMessage("You pull of a devasting attack!",AsciiPanel.brightRed);
-            else if (r<0.8)
-                addMessage("Your grandpa's secret technique passsed on through the generations hits!",AsciiPanel.brightRed);
-            else if (r<1)
-                addMessage("YOU IMPALE THE LITTLE INSECT",AsciiPanel.brightRed);
+            ai.addCritMessage(other);
             other.dealDamage((dmg+5)*2-other.def);
             setRp(3);
         } else if (atkRoll <= 1) {
-            double r = Math.random();
-            if (r<0.2)
-                addMessage("You are very MISS-leading in your combat ability.");
-            else if (r<0.4)
-                addMessage("Even a baby could of hit that.");
-            else if (r<0.6)
-                addMessage("You get an A for effort.");
-            else if (r<0.8)
-                addMessage("Who taught you to fight, your grandpa?");
-            else if (r<1)
-                addMessage("YOU SHAME YOUR FAMILY");
+            ai.addCritMissMessage(other);
             setRp(-1);
         } else if (atkRoll <= 10-(atk-other.eva)) {
-            double r = Math.random();
-            if (r<0.2)
-                addMessage("Your weapon barely grazes it. Try harder.", Color.WHITE);
-            else if (r<0.4)
-                addMessage("You miss.", Color.WHITE);
-            else if (r<0.6)
-                addMessage("You missed. Better luck next time!", Color.WHITE);
-            else if (r<0.8)
-                addMessage("Maybe you should train harder.", Color.WHITE);
-            else if (r<1)
-                addMessage("You must study more.", Color.WHITE);
+            ai.addMissMessage(other);
         } else {
-            double r = Math.random();
-            if (r<0.2)
-                addMessage("You hit the " + other.getName() + ".", AsciiPanel.red);
-            else if (r<0.4)
-                addMessage("You strike the " + other.getName() + ".", AsciiPanel.red);
-            else if (r<0.6)
-                addMessage("You swing at the " + other.getName() + ".", AsciiPanel.red);
-            else if (r<0.8)
-                addMessage("You smack the " + other.getName() + ".", AsciiPanel.red);
-            else if (r<1)
-                addMessage("You clobber the " + other.getName() + ".", AsciiPanel.red);
+            ai.addHitMessage(other);
             other.dealDamage(dmg-other.def+dmgRoll);
             setRp(1);
         }
