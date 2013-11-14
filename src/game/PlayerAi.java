@@ -47,18 +47,18 @@ public class PlayerAi extends CreatureAi {
     public ArrayList<Message> initializeMessageList() {
         ArrayList<Message> m = new ArrayList<Message>();
             // Critical hit messages
-            m.add(Message.getConvertedMessage("Your weapon bestows your rage upon your victims!",AsciiPanel.brightRed));
-            m.add(Message.getConvertedMessage("You skewer the pathetic creature!",AsciiPanel.brightRed));
-            m.add(Message.getConvertedMessage("You pull of a devasting attack!",AsciiPanel.brightRed));
-            m.add(Message.getConvertedMessage("Your grandpa's secret technique passsed on through the generations hits!",AsciiPanel.brightRed));
-            m.add(Message.getConvertedMessage("YOU IMPALE THE LITTLE INSECT",AsciiPanel.brightRed));
+            m.add(new Message("Your weapon bestows your rage upon your victims!",AsciiPanel.brightRed));
+            m.add(new Message("You skewer the pathetic creature!",AsciiPanel.brightRed));
+            m.add(new Message("You pull of a devasting attack!",AsciiPanel.brightRed));
+            m.add(new Message("Your grandpa's secret technique passsed on through the generations hits!",AsciiPanel.brightRed));
+            m.add(new Message("YOU IMPALE THE LITTLE INSECT",AsciiPanel.brightRed));
             
             // Hit messages
-            m.add(Message.getConvertedMessage("You hit",AsciiPanel.red));
-            m.add(Message.getConvertedMessage("You strike",AsciiPanel.red));
-            m.add(Message.getConvertedMessage("You swing at",AsciiPanel.red));
-            m.add(Message.getConvertedMessage("You smack",AsciiPanel.red));
-            m.add(Message.getConvertedMessage("You clobber",AsciiPanel.red));
+            m.add(new Message("You hit",AsciiPanel.red));
+            m.add(new Message("You strike",AsciiPanel.red));
+            m.add(new Message("You swing at",AsciiPanel.red));
+            m.add(new Message("You smack",AsciiPanel.red));
+            m.add(new Message("You clobber",AsciiPanel.red));
             /*
             m.add(Message.getConvertedMessage("",AsciiPanel.));
             m.add(Message.getConvertedMessage("",AsciiPanel.));

@@ -2,34 +2,24 @@ package game;
 
 import java.awt.Color;
 import asciiPanel.AsciiPanel;
-import game.ColoredChar;
+import java.util.ArrayList;
 
 public class Message {
-    private ColoredChar[] characters = new ColoredChar[80];
-    
-    public Message(ColoredChar[] characters) {
-        this.characters = characters;
+    private String message;
+    private Color color;
+       
+    public Message(String message, Color color) {
+        this.message = message;
+        this.color = color;
     }
     
-    public static Message getConvertedMessage(String input, Color color) {
-        ColoredChar[] newMessage = new ColoredChar[80];
-        for (int i=0;i<input.length();i++) {
-            if (input.charAt(i)==0)
-                break;
-            newMessage[i] = ColoredChar.getConvertedChar(input.charAt(i), color);
-        }
-        return new Message(newMessage);
-    }
-    
-    public static Message getConvertedMessage(String input) {
-        return getConvertedMessage(input,AsciiPanel.white);
+    public Message(String message) {
+        this(message, AsciiPanel.white);
     }
 
-    public ColoredChar[] getMessage() { return characters; }
-    public String getString() { char[] newChars=new char[80]; for(int i=0;i<characters.length;i++) { if(newChars[i]==0) break; newChars[i]=characters[i].getChar(); } return new String(newChars); }
-    public ColoredChar getCharacter(int index) { if(characters[index]!=null) return characters[index]; return null;}
-    public int getLength() { return characters.length; }
-    
-    public void setCharacter(ColoredChar character, int index) { characters[index] = character; }
-    public void setMessage(ColoredChar[] characters) { this.characters = characters; }
+    public String getMessage() { return this.message; }
+    public Color getColor() { return this.color; }
+    public int getLength() { return message.length(); }
+    public void append(String input) { this.message.concat(input); }
+    public void setMessage(String message) { this.message = message; }
 }

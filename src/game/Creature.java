@@ -101,8 +101,8 @@ public class Creature {
     public void setCreatureAi(CreatureAi ai) { this.ai = ai; }
 
     public void addMessage(Message message) { messages.add(message); }
-    public void addMessage(String message) { messages.add(Message.getConvertedMessage(message)); }
-    public void addMessage(String message, Color color) { messages.add(Message.getConvertedMessage(message,color)); }
+    public void addMessage(String message) { messages.add(new Message(message)); }
+    public void addMessage(String message, Color color) { messages.add(new Message(message,color)); }
     
     public void update() { ai.update(); }
     public void dealDamage(int damage) { setHp(Math.min(-damage,-1)); }
@@ -122,15 +122,15 @@ public class Creature {
             this.def -= this.shield.getEquipable().getDef();
             this.eva -= this.shield.getEquipable().getEva();
             if (item.getItem().getEquipable().getType() == 0) {
-                addMessage(this.weapon.getEquipable().getName() + " dropped.");
+                addMessage(this.weapon.getEquipable().getName() + " dropped.", AsciiPanel.green);
                 newItemDropped = new GroundedItem(this.weapon, x, y);
                 this.weapon = item.getItem();
             } else if (item.getItem().getEquipable().getType() == 1) {
-                addMessage(this.armor.getEquipable().getName() + " dropped.");
+                addMessage(this.armor.getEquipable().getName() + " dropped.", AsciiPanel.green);
                 newItemDropped = new GroundedItem(this.armor, x, y);
                 this.armor = item.getItem();
             } else if (item.getItem().getEquipable().getType() == 2) {
-                addMessage(this.shield.getEquipable().getName() + " dropped.");
+                addMessage(this.shield.getEquipable().getName() + " dropped.", AsciiPanel.green);
                 newItemDropped = new GroundedItem(this.shield, x, y);
                 this.shield = item.getItem();
             }
@@ -141,7 +141,7 @@ public class Creature {
             this.def += this.shield.getEquipable().getDef();
             this.eva += this.shield.getEquipable().getEva();
             world.remove(item);
-            addMessage(item.getItem().getEquipable().getName() + " equipped.");
+            addMessage(item.getItem().getEquipable().getName() + " equipped.", AsciiPanel.green);
             world.setItem(newItemDropped);
         }
     }
@@ -156,7 +156,7 @@ public class Creature {
             attack(other);
         }
         if (item != null) {
-            addMessage("You find a " + item.getItem().getEquipable().getName() + ".");
+            addMessage("You find a " + item.getItem().getEquipable().getName() + ".", Color.WHITE);
         }
     }
 
@@ -166,15 +166,15 @@ public class Creature {
         if (atkRoll >= 20) {
             double r = Math.random();
             if (r<0.2)
-                addMessage(m.get(0));
+                addMessage("Your weapon bestows your rage upon your victims!", AsciiPanel.brightRed);
             else if (r<0.4)
-                addMessage(m.get(1));
+                addMessage("You skewer the pathetic creature!",AsciiPanel.brightRed);
             else if (r<0.6)
-                addMessage(m.get(2));
+                addMessage("You pull of a devasting attack!",AsciiPanel.brightRed);
             else if (r<0.8)
-                addMessage(m.get(3));
+                addMessage("Your grandpa's secret technique passsed on through the generations hits!",AsciiPanel.brightRed);
             else if (r<1)
-                addMessage(m.get(4));
+                addMessage("YOU IMPALE THE LITTLE INSECT",AsciiPanel.brightRed);
             other.dealDamage((dmg+5)*2-other.def);
             setRp(3);
         } else if (atkRoll <= 1) {
@@ -193,34 +193,33 @@ public class Creature {
         } else if (atkRoll <= 10-(atk-other.eva)) {
             double r = Math.random();
             if (r<0.2)
-                addMessage("Your weapon barely grazes it. Try harder.");
+                addMessage("Your weapon barely grazes it. Try harder.", Color.WHITE);
             else if (r<0.4)
-                addMessage("You miss.");
+                addMessage("You miss.", Color.WHITE);
             else if (r<0.6)
-                addMessage("You missed. Better luck next time!");
+                addMessage("You missed. Better luck next time!", Color.WHITE);
             else if (r<0.8)
-                addMessage("Maybe you should train harder.");
+                addMessage("Maybe you should train harder.", Color.WHITE);
             else if (r<1)
-                addMessage("You must study more.");
+                addMessage("You must study more.", Color.WHITE);
         } else {
             double r = Math.random();
             if (r<0.2)
-                addMessage(Message.getConvertedMessage(m.get(5).getString()+" the "+other.getName()+".",AsciiPanel.red));
+                addMessage("You hit the " + other.getName() + ".", AsciiPanel.red);
             else if (r<0.4)
-                addMessage(Message.getConvertedMessage(m.get(6).getString()+" the "+other.getName()+".",AsciiPanel.red));
+                addMessage("You strike the " + other.getName() + ".", AsciiPanel.red);
             else if (r<0.6)
-                addMessage(Message.getConvertedMessage(m.get(7).getString()+" the "+other.getName()+".",AsciiPanel.red));
+                addMessage("You swing at the " + other.getName() + ".", AsciiPanel.red);
             else if (r<0.8)
-                addMessage(Message.getConvertedMessage(m.get(8).getString()+" the "+other.getName()+".",AsciiPanel.red));
+                addMessage("You smack the " + other.getName() + ".", AsciiPanel.red);
             else if (r<1)
-                addMessage(Message.getConvertedMessage(m.get(9).getString()+" the "+other.getName()+".",AsciiPanel.red));
-            addMessage("You strike the " + other.getName() + ".");
+                addMessage("You clobber the " + other.getName() + ".", AsciiPanel.red);
             other.dealDamage(dmg-other.def+dmgRoll);
             setRp(1);
         }
         if (other.getCurrentHp()<1) {
             world.remove(other);
-            addMessage("The " + other.getName() + " dies!");
+            addMessage("The " + other.getName() + " dies!", AsciiPanel.brightGreen);
             setRp(1);
             setHp(1);
         }

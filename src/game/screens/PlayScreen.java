@@ -20,7 +20,7 @@ public class PlayScreen implements Screen {
 
     public PlayScreen() {
         messages = new ArrayList();
-        messages.add(Message.getConvertedMessage("Game Started!"));
+        messages.add(new Message("Game Started!"));
         screenWidth = 40;
         screenHeight = 14;
         mapWidth = 200;
@@ -173,11 +173,7 @@ public class PlayScreen implements Screen {
         }
         for (int i=0;i<messages.size();i++) {
             Message message = messages.get(i);
-            for(int j=0;j<message.getLength();j++) {
-                if (message.getCharacter(j)==null)
-                    break;
-                terminal.write(message.getCharacter(j).getChar(),1+j,23-i,message.getCharacter(i).getColor());
-            }
+            terminal.write(message.getMessage(),1,23-i,message.getColor());
         }
     }
 }
