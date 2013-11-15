@@ -9,7 +9,7 @@ public class Item {
     private int def;
     private Brand brand;
     private static final int NUMBER_OF_BRANDS = Brand.values().length;
-    private static final double BRAND_CHANCE = 2.0;
+    private static final double BRAND_CHANCE = 0.25;
     private static final int NUMBER_OF_EQUIPABLES = Equipable.values().length;
     
     public Item() {
@@ -19,7 +19,7 @@ public class Item {
         this.atk = this.type.getAtk() + brand.getAtk();
         this.dmg = this.type.getDmg() + brand.getDmg();
         this.eva = this.type.getEva() + brand.getEva();
-        this.def = this.type.getDef() + brand.getDmg();
+        this.def = this.type.getDef() + brand.getDef();
     }
     
     public Item(Equipable type, int enchant) {

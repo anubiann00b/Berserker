@@ -86,16 +86,16 @@ public class PlayScreen implements Screen {
 
                 Creature creature = world.getCreature(wx, wy);
                 GroundedItem item = world.getItem(wx, wy);
-                if (player.canSee(wx, wy)) {
+                //if (player.canSee(wx, wy)) {
                     terminal.write(world.getGlyph(wx, wy), x + 1, y + 1, world.getColor(wx, wy));
                     if (creature != null) {
                         terminal.write(creature.getGlyph(), creature.getX() - left + 1, creature.getY() - top + 1, creature.getColor());
                     } else if (item != null) {
                         terminal.write(item.getItem().getEquipable().getGlyph(), item.getX() - left + 1, item.getY() - top + 1, item.getItem().getEquipable().getColor());
                     }
-                } else {
-                    terminal.write(fov.tile(wx, wy).glyph(), x + 1, y + 1, Color.DARK_GRAY);
-                }
+                //} else {
+                //    terminal.write(fov.tile(wx, wy).glyph(), x + 1, y + 1, Color.DARK_GRAY);
+                //}
             }
         }
     }
@@ -123,11 +123,11 @@ public class PlayScreen implements Screen {
         if (player.getCurrentHp()<1) {
             return new DieScreen();
         }
-        if (world.getKillCount()>=25) {
-            return new WinScreen();
-        }
+        //if (world.getKillCount()>=25) {
+        //    return new WinScreen();
+        //}
         world.update();
-        creatureFactory.newKobold(new FieldOfView(world), player);
+        //creatureFactory.newKobold(new FieldOfView(world), player);
         return this;
     }
     
@@ -163,9 +163,12 @@ public class PlayScreen implements Screen {
         terminal.write("Eva|" + player.getEva(),60,5);
         terminal.write("Def|" + player.getDef(),69,5);
         terminal.write("Weapon : " + player.getWeapon().getName(),42,7);
-        terminal.write("Armor  : " + player.getArmor().getName(),42,8);
-        terminal.write("Shield : " + player.getShield().getName(),42,9);
-        terminal.write("Kills: " + world.getKillCount(),42,11);
+        terminal.write("  " + " (" + player.getWeapon().getAtk() + "  " + player.getWeapon().getDmg() + "  " + player.getWeapon().getEva() + "  " + player.getWeapon().getDef() + ")",42,8);       
+        terminal.write("Armor  : " + player.getArmor().getName(),42,9);
+        terminal.write("  " + " (" + player.getArmor().getAtk() + "  " + player.getArmor().getDmg() + "  " + player.getArmor().getEva() + "  " + player.getArmor().getDef() + ")",42,10);
+        terminal.write("Shield : " + player.getShield().getName(),42,11);
+        terminal.write("  " + " (" + player.getShield().getAtk() + "  " + player.getShield().getDmg() + "  " + player.getShield().getEva() + "  " + player.getShield().getDef() + ")",42,12);
+        terminal.write("Kills: " + world.getKillCount(),42,13);
     }
     
     public void displayMessages(AsciiPanel terminal) {
