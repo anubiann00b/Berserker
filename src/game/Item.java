@@ -9,38 +9,43 @@ public class Item {
     private int def;
     private Brand brand;
     private static final int NUMBER_OF_BRANDS = Brand.values().length;
-    private static final double BRAND_CHANCE = 0.10;
+    private static final double BRAND_CHANCE = 2.0;
     private static final int NUMBER_OF_EQUIPABLES = Equipable.values().length;
-
-    public Equipable getEquipable() { return type; }
-    public Brand getBrand() { return brand; }
     
     public Item() {
         this.type = generateType();
         this.brand = generateBrand();
-        this.name = this.type.getName();
+        this.name = generateName(this.brand);
+        this.atk = this.type.getAtk() + brand.getAtk();
+        this.dmg = this.type.getDmg() + brand.getDmg();
+        this.eva = this.type.getEva() + brand.getEva();
+        this.def = this.type.getDef() + brand.getDmg();
+    }
+    
+    public Item(Equipable type, int enchant) {
+        this(type, Brand.NONE, enchant);
+    }
+    
+    public Item(Equipable type, Brand brand, int enchant) {
+        this.brand = brand;
+        this.type = type;
+        this.name = generateName(this.brand);
         this.atk = this.type.getAtk() + brand.getAtk();
         this.dmg = this.type.getDef() + brand.getDef();
         this.eva = this.type.getEva() + brand.getEva();
         this.def = this.type.getDef() + brand.getDmg();
     }
     
-    public Item(Equipable type, int enchant) {
-        this(type, null, enchant);
-    }
+    public String getName() { return name; }
+    public Equipable getEquipable() { return type; }
+    public Brand getBrand() { return brand; }
+    public int getAtk() { return atk; }
+    public int getDmg() { return dmg; }
+    public int getDef() { return def; }
+    public int getEva() { return eva; }
     
-    public Item(Equipable type, Brand brand, int enchant) {
-        this.name = type.getName();
-        this.type = type;
-        this.atk = type.getAtk();
-        this.dmg = type.getDmg();
-        this.eva = type.getEva();
-        this.def = type.getDef();
-        this.brand = brand;
-    }
-
     public Brand generateBrand() {
-        if (Math.random() < BRAND_CHANCE) {
+        if (Math.random() < BRAND_CHANCE && type.getType() == 0) {
             int r = (int) Math.floor(Math.random()*NUMBER_OF_BRANDS);
             Brand[] brands = Brand.values();
             return brands[r];
@@ -55,5 +60,11 @@ public class Item {
         
        return equipables[r];
        
+    }
+    
+    private String generateName(Brand brand) {
+        if(brand!=Brand.NONE)
+            return this.type.getName() + " of " + this.brand.getName();
+        return this.type.getName();
     }
 }

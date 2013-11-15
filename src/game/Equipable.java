@@ -5,7 +5,7 @@ import asciiPanel.AsciiPanel;
 import java.awt.Color;
 
 public enum Equipable {
-// Weapons            Name  Atk Dmg Def Eva Rare Char   Color                Type
+// Weapons                Name  Atk Dmg Def Eva Rare Char   Color                Type
     STICK               ("Stick", 1,  1,  0,  0,  0, '/',  Color.LIGHT_GRAY,       0),
     QUICKBLADE     ("Quickblade", 11, 1,  0,  0,  2, ')',  Color.LIGHT_GRAY,       0),
     DAGGER             ("Dagger", 10, 2,  0,  0,  3, ')',  AsciiPanel.brightBlue,  0),

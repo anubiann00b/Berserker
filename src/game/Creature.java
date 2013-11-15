@@ -107,40 +107,43 @@ public class Creature {
     public void dealDamage(int damage) { setHp(Math.min(-damage,-1)); }
     public boolean canSee(int wx, int wy) { return ai.canSee(wx, wy); }
     
-    public void pickUp()
-    {
+    public void pickUp() {
         GroundedItem item = world.getItem(x, y);
         GroundedItem newItemDropped = null;
         if (item == null) {
-            addMessage("You sucessfully pick up nothing!");
+            addMessage("You sucessfully pick up nothing!", Color.ORANGE);
         } else {
-            this.atk -= this.weapon.getEquipable().getAtk();
-            this.dmg -= this.weapon.getEquipable().getDmg();
-            this.def -= this.armor.getEquipable().getDef();
-            this.eva -= this.armor.getEquipable().getEva();
-            this.def -= this.shield.getEquipable().getDef();
-            this.eva -= this.shield.getEquipable().getEva();
+            this.atk -= this.weapon.getAtk();
+            this.dmg -= this.weapon.getDmg();
+            this.eva -= this.weapon.getEva();
+            this.def -= this.weapon.getDef();
+            this.def -= this.armor.getDef();
+            this.eva -= this.armor.getEva();
+            this.def -= this.shield.getDef();
+            this.eva -= this.shield.getEva();
             if (item.getItem().getEquipable().getType() == 0) {
-                addMessage(this.weapon.getEquipable().getName() + " dropped.", AsciiPanel.green);
+                addMessage(this.weapon.getName() + " dropped.", AsciiPanel.green);
                 newItemDropped = new GroundedItem(this.weapon, x, y);
                 this.weapon = item.getItem();
             } else if (item.getItem().getEquipable().getType() == 1) {
-                addMessage(this.armor.getEquipable().getName() + " dropped.", AsciiPanel.green);
+                addMessage(this.armor.getName() + " dropped.", AsciiPanel.green);
                 newItemDropped = new GroundedItem(this.armor, x, y);
                 this.armor = item.getItem();
             } else if (item.getItem().getEquipable().getType() == 2) {
-                addMessage(this.shield.getEquipable().getName() + " dropped.", AsciiPanel.green);
+                addMessage(this.shield.getName() + " dropped.", AsciiPanel.green);
                 newItemDropped = new GroundedItem(this.shield, x, y);
                 this.shield = item.getItem();
             }
-            this.atk += this.weapon.getEquipable().getAtk();
-            this.dmg += this.weapon.getEquipable().getDmg();
-            this.def += this.armor.getEquipable().getDef();
-            this.eva += this.armor.getEquipable().getEva();
-            this.def += this.shield.getEquipable().getDef();
-            this.eva += this.shield.getEquipable().getEva();
+            this.atk += this.weapon.getAtk();
+            this.dmg += this.weapon.getDmg();
+            this.eva += this.weapon.getEva();
+            this.def += this.weapon.getDef();
+            this.def += this.armor.getDef();
+            this.eva += this.armor.getEva();
+            this.def += this.shield.getDef();
+            this.eva += this.shield.getEva();
             world.remove(item);
-            addMessage(item.getItem().getEquipable().getName() + " equipped.", AsciiPanel.green);
+            addMessage(item.getItem().getName() + " equipped.", AsciiPanel.green);
             world.setItem(newItemDropped);
         }
     }
@@ -155,7 +158,7 @@ public class Creature {
             attack(other);
         }
         if (item != null) {
-            addMessage("You find a " + item.getItem().getEquipable().getName() + ".", Color.WHITE);
+            addMessage("You find a " + item.getItem().getName() + ".", Color.WHITE);
         }
     }
 

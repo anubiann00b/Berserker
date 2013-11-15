@@ -58,6 +58,22 @@ public class World {
         return null;
     }
     
+    public boolean isThereItem(int x, int y) {
+        for (GroundedItem i : items){
+            if (i.getX() == x && i.getY() == y)
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean isThereCreature(int x, int y) {
+        for (Creature c : creatures){
+            if (c.getX() == x && c.getY() == y)
+                return true;
+        }
+        return false;
+    }
+    
     public void setItem(GroundedItem item) {
         items.add(item);
     }
@@ -88,7 +104,7 @@ public class World {
             x = (int)(Math.random() * width);
             y = (int)(Math.random() * height);
         }
-        while (!tile(x,y).isGround());
+        while (!tile(x,y).isPassable() && !isThereCreature(x,y));
 
         creature.setX(x);
         creature.setY(y);
@@ -102,8 +118,7 @@ public class World {
         do {
             x = (int)(Math.random() * width);
             y = (int)(Math.random() * height);
-        }
-        while (!tile(x,y).isGround());
+        } while (!tile(x,y).isPassable() && !isThereItem(x,y));
 
         item.setX(x);
         item.setY(y);

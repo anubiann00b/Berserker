@@ -1,9 +1,16 @@
 package game.screens;
 //                                                                              Screw the 80 character limit.
 import asciiPanel.AsciiPanel;
-import java.awt.event.KeyEvent;
-import game.*;
+import game.Creature;
+import game.CreatureFactory;
+import game.FieldOfView;
+import game.GroundedItem;
+import game.ItemFactory;
+import game.Message;
+import game.World;
+import game.WorldBuilder;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -43,10 +50,10 @@ public class PlayScreen implements Screen {
         for (int i=0;i<50;i++) {
             creatureFactory.newKobold(new FieldOfView(world), player);
         }
-    }    
+    }
     
     private void spawnItems(ItemFactory itemFactory){
-        for (int i=0;i<25;i++){
+        for (int i=0;i<80;i++){
             itemFactory.spawnItem();
         }
     }
@@ -155,9 +162,9 @@ public class PlayScreen implements Screen {
         terminal.write("Dmg|" + player.getDmg(),51,5);
         terminal.write("Eva|" + player.getEva(),60,5);
         terminal.write("Def|" + player.getDef(),69,5);
-        terminal.write("Weapon : " + player.getWeapon().getEquipable().getName(),42,7);
-        terminal.write("Armor  : " + player.getArmor().getEquipable().getName(),42,8);
-        terminal.write("Shield : " + player.getShield().getEquipable().getName(),42,9);
+        terminal.write("Weapon : " + player.getWeapon().getName(),42,7);
+        terminal.write("Armor  : " + player.getArmor().getName(),42,8);
+        terminal.write("Shield : " + player.getShield().getName(),42,9);
         terminal.write("Kills: " + world.getKillCount(),42,11);
     }
     

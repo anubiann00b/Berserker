@@ -46,7 +46,7 @@ public class WorldBuilder {
                     tiles2[x][y] = Tile.WALL;
                 } else if (walls == 0) {
                     tiles2[x][y] = Tile.WALL;
-                } else {    
+                } else {
                     tiles2[x][y] = Tile.FLOOR;
                 }
                 tiles2[x][y] = floors >= walls ? Tile.FLOOR : Tile.WALL;
