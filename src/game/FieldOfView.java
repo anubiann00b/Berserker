@@ -43,9 +43,9 @@ public class FieldOfView {
                     continue;
           
                 for (Point p : new Line(wx, wy, wx + x, wy + y)) {
-                    Tile tile = world.tile(p.x, p.y);
-                    visible[p.x][p.y] = true;
-                    tiles[p.x][p.y] = tile;
+                    Tile tile = world.tile(p.getX(), p.getY());
+                    visible[p.getX()][p.getY()] = true;
+                    tiles[p.getX()][p.getY()] = tile;
               
                     if (!tile.isTransparent())
                         break;

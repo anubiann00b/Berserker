@@ -17,7 +17,7 @@ public class CreatureAi {
             return false;
      
         for (Point p : new Line(creature.getX(), creature.getY(), wx, wy)) {
-            if (creature.getTile(p.x, p.y).isPassable() || p.x == wx && p.y == wy)
+            if (creature.getTile(p.getX(), p.getY()).isPassable() || p.getX() == wx && p.getY() == wy)
                 continue;
             return false;
         }

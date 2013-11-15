@@ -86,16 +86,16 @@ public class PlayScreen implements Screen {
 
                 Creature creature = world.getCreature(wx, wy);
                 GroundedItem item = world.getItem(wx, wy);
-                //if (player.canSee(wx, wy)) {
+                if (player.canSee(wx, wy)) {
                     terminal.write(world.getGlyph(wx, wy), x + 1, y + 1, world.getColor(wx, wy));
                     if (creature != null) {
                         terminal.write(creature.getGlyph(), creature.getX() - left + 1, creature.getY() - top + 1, creature.getColor());
                     } else if (item != null) {
                         terminal.write(item.getItem().getEquipable().getGlyph(), item.getX() - left + 1, item.getY() - top + 1, item.getItem().getEquipable().getColor());
                     }
-                //} else {
-                //    terminal.write(fov.tile(wx, wy).glyph(), x + 1, y + 1, Color.DARK_GRAY);
-                //}
+                } else {
+                    terminal.write(fov.tile(wx, wy).glyph(), x + 1, y + 1, Color.DARK_GRAY);
+                }
             }
         }
     }
