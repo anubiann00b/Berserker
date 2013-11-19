@@ -64,9 +64,9 @@ public class PlayScreen implements Screen {
                 .build();
     }
 
-    public int getScrollX() { return Math.max(0,Math.min(player.getX()-screenWidth/2,world.width()-screenWidth)); }
+    public int getScrollX() { return Math.max(0,Math.min(player.getX()-screenWidth/2,world.getWidth()-screenWidth)); }
 
-    public int getScrollY() { return Math.max(0,Math.min(player.getY()-screenHeight/2,world.height()-screenHeight)); }
+    public int getScrollY() { return Math.max(0,Math.min(player.getY()-screenHeight/2,world.getHeight()-screenHeight)); }
 
     public void displayMap(AsciiPanel terminal) {
         int left = getScrollX();
@@ -127,7 +127,6 @@ public class PlayScreen implements Screen {
         //    return new WinScreen();
         //}
         world.update();
-        //creatureFactory.newKobold(new FieldOfView(world), player);
         return this;
     }
     

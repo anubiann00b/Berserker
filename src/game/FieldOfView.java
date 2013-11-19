@@ -17,29 +17,29 @@ public class FieldOfView {
  
     public FieldOfView(World world) {
         this.world = world;
-        this.visible = new boolean[world.width()][world.height()];
-        this.tiles = new Tile[world.width()][world.height()];
+        this.visible = new boolean[world.getWidth()][world.getHeight()];
+        this.tiles = new Tile[world.getWidth()][world.getHeight()];
         
         blankFOV();
     }
     
     public void blankFOV() {
-        for (int x = 0; x < world.width(); x++) {
-            for (int y = 0; y < world.height(); y++) {
+        for (int x = 0; x < world.getWidth(); x++) {
+            for (int y = 0; y < world.getHeight(); y++) {
                 tiles[x][y] = Tile.UNKNOWN;
             }
         }
     }
     
     public void update(int wx, int wy, int r) {
-        visible = new boolean[world.width()][world.height()];
+        visible = new boolean[world.getWidth()][world.getHeight()];
      
         for (int x = -r; x <= r; x++) {
             for (int y = -r; y <= r; y++) {
                 if (x*x + y*y >= r*r)
                     continue;
           
-                if (wx + x < 0 || wx + x >= world.width() || wy + y < 0 || wy + y >= world.height())
+                if (wx + x < 0 || wx + x >= world.getWidth() || wy + y < 0 || wy + y >= world.getHeight())
                     continue;
           
                 for (Point p : new Line(wx, wy, wx + x, wy + y)) {

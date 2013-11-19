@@ -8,16 +8,14 @@ public class World {
     private Tile[][] tiles;
     private ArrayList<GroundedItem> items;
     private ArrayList<Creature> creatures;
-    
+    private int height;
     private int width;
     private int killCount=0;
-    public int getKillCount() {
-        return killCount;
-    }
-    public int width() { return width; }
- 
-    private int height;
-    public int height() { return height; }
+    
+    public int getKillCount() { return killCount; }
+    public int getWidth() { return width; }
+    public int getHeight() { return height; }
+    public Tile[][] getMap() { return tiles; }
  
     public World(Tile[][] tiles){
         this.tiles = tiles;
