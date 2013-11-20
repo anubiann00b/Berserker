@@ -1,4 +1,14 @@
-CrawleR
+Berserker
 =======
 
-A WIP roguelike based of Dungeon Crawl Stone Soup written in Java. Made by Shreyas under Snake Squared Industries. Right now it doesn't do anything, but I'm working on it...
+A WIP roguelike loosely based of Dungeon Crawl Stone Soup written in Java.
+
+Special Thanks:
+
+Trog, for endowing upon us the art of Berserking.
+  
+Edward, for creating the original BAZAKA.
+  
+Liam, for inspiring with us the fiery passion for programming.
+  
+Trystan, for an awesome library and tutorial.
