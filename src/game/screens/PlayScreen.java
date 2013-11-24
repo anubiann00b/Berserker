@@ -127,6 +127,7 @@ public class PlayScreen implements Screen {
         //    return new WinScreen();
         //}
         world.update();
+        //Pathfinder.findPath(new Point(player.getX(),player.getY()), new Point(player.getX()+6,player.getY()+4), world.getMap());
         return this;
     }
     

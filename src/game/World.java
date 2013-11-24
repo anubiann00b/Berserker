@@ -33,7 +33,7 @@ public class World {
     }
     
     public char getGlyph(int x, int y) {
-        return tile(x, y).glyph();
+        return tile(x,y).glyph();
     }
     
     public Color getColor(int x, int y) {

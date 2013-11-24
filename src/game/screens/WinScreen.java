@@ -18,6 +18,7 @@ public class WinScreen implements Screen {
         terminal.write("Trog, for endowing upon us the art of Berserking",5,14);
         terminal.write("Edward, for creating the original BAZAKA",5,16);
         terminal.write("Liam, for inspiring with us the fiery passion for programming",5,18);
+        terminal.write("Trystan, for an awesome library and tutorial.",5,20);
     }
 
     public Screen respondToUserInput(KeyEvent key) {

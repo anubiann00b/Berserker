@@ -29,11 +29,13 @@ public class Node {
     public Node(Point point) {
         this.x = point.getX();
         this.y = point.getY();
+        parent = null;
     }
         
     public Node(int x, int y) {
         this.x = x;
         this.y = y;
+        parent = null;
     }
     
     public Node(int x, int y, Node parent) {
@@ -44,16 +46,16 @@ public class Node {
         
     public boolean equals(Object obj) {
         if (this == obj)
-         return true;
+            return true;
         if (obj == null)
-         return false;
-        if (!(obj instanceof Point))
-         return false;
-        Point other = (Point) obj;
+            return false;
+        if (!(obj instanceof Node))
+            return false;
+        Node other = (Node) obj;
         if (x != other.getX())
-         return false;
-        if (y != other.getX())
-         return false;
+            return false;
+        if (y != other.getY())
+            return false;
         return true;
     }
     
