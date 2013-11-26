@@ -50,7 +50,7 @@ public class PlayerAi extends CreatureAi {
         else if (r<0.4)
             creature.addMessage("You skewer the pathetic creature!",AsciiPanel.brightRed);
         else if (r<0.6)
-            creature.addMessage("You pull of a devasting attack!",AsciiPanel.brightRed);
+            creature.addMessage("You pull off a devasting attack!",AsciiPanel.brightRed);
         else if (r<0.8)
             creature.addMessage("Your grandpa's secret technique passsed on through the generations hits!",AsciiPanel.brightRed);
         else if (r<1)
