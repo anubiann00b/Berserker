@@ -19,7 +19,7 @@ public class KoboldAi extends CreatureAi {
     }
         
     public void update() {
-        if (creature.canSee(player.getX(), player.getY()))
+        if (creature.canSee(player.getX(),player.getY()))
             hunt();
         else
             wander();
