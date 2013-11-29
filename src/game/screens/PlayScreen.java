@@ -120,14 +120,14 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_2: player.setRp(-1); break;
             case KeyEvent.VK_COMMA: case KeyEvent.VK_G: player.pickUp();
         }
-        if (player.getCurrentHp()<1) {
-            return new DieScreen();
-        }
         //if (world.getKillCount()>=25) {
         //    return new WinScreen();
         //}
         world.update();
         //Pathfinder.findPath(new Point(player.getX(),player.getY()), new Point(player.getX()+6,player.getY()+4), world.getMap());
+        if (player.getCurrentHp()<1) {
+            return new DieScreen();
+        }
         return this;
     }
     

@@ -28,16 +28,46 @@ public class KoboldAi extends CreatureAi {
     private void hunt() {
         int ox = creature.getX()-player.getX();
         int oy = creature.getY()-player.getY();
+        int xIndex = 0;
+        int yIndex = 0;
         if (ox>0) {
-            creature.moveBy(-1,0);
+            xIndex--;
         } else if (ox<0) {
-            creature.moveBy(1,0);
+            xIndex++;
         }
         if (oy>0) {
-            creature.moveBy(0,-1);
+            yIndex--;
         } else if (oy<0) {
-            creature.moveBy(0,1);
+            yIndex++;
         }
+        creature.moveBy(xIndex,yIndex);
+        /*
+        int lowest = Math.max(ox,oy)-1;
+        int[][] area = new int[3][3];
+        area[1][1] = Math.max(ox,oy);
+        for(int ry=1;ry>=-1;ry--) {
+            for(int rx=-1;rx<=1;rx++) {
+                ox = Math.abs(creature.getX()+rx-player.getX());
+                oy = Math.abs(creature.getY()+ry-player.getY());
+                area[1+rx][1+ry] = Math.max(ox,oy);
+            }
+        }
+        String area1 = area[0][0] + " " + area[0][1] + " " + area[0][2];
+        String area2 = area[1][0] + " " + area[1][1] + " " + area[1][2];
+        String area3 = area[2][0] + " " + area[2][1] + " " + area[2][2];
+        System.out.println(lowest);
+        System.out.println(area1);
+        System.out.println(area2);
+        System.out.println(area3);
+        System.out.println();
+        
+        int xIndex = (int) (Math.random()*3);
+        int yIndex = (int) (Math.random()*3);
+        do {
+            xIndex = (int) (Math.random()*3);
+            yIndex = (int) (Math.random()*3);
+        } while (Math.max(Math.abs(creature.getX()+xIndex-player.getX()),Math.abs(creature.getY()+yIndex-player.getY()))>lowest);
+        */
     }
     
     protected void addCritMessage(Creature other) {

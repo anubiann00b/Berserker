@@ -26,7 +26,7 @@ public class Creature {
     private Item shield;
     private Item armor;
     protected ArrayList<Message> messages = new ArrayList();
-    protected ArrayList<Status> statuses = new ArrayList();
+    private ArrayList<Status> statuses = new ArrayList();
     private ArrayList<Message> m = new ArrayList();
     
     Creature(String name, World world, char glyph, Color color, int maxHp, int maxRp, int baseStats) {
