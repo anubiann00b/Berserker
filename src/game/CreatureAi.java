@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class CreatureAi {
     protected Creature creature;
- 
-    public CreatureAi(Creature creature){
+    
+    public CreatureAi(Creature creature) {
         this.creature = creature;
         this.creature.setCreatureAi(this);
     }
- 
-    public void onEnter(int x, int y, Tile tile) { }
     
+    public void onEnter(int x, int y, Tile tile) { }
+
     public boolean canSee(int wx, int wy) {
         if ((creature.getX()-wx)*(creature.getX()-wx) + (creature.getY()-wy)*(creature.getY()-wy) > creature.getVisionRadius()*creature.getVisionRadius())
             return false;

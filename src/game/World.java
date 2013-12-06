@@ -11,6 +11,7 @@ public class World {
     private int height;
     private int width;
     private int killCount=0;
+    Player player;
     
     public int getKillCount() { return killCount; }
     public int getWidth() { return width; }
@@ -41,10 +42,16 @@ public class World {
     }
     
     public Creature getCreature(int x, int y){
-        for (Creature c : creatures){
+        for (Creature c : creatures) {
             if (c.getX() == x && c.getY() == y)
                 return c;
         }
+        return null;
+    }
+    
+    public Player getPlayer(int x, int y){
+        if (player.getX()==x&&player.getY()==y)
+            return player;
         return null;
     }
     
@@ -72,6 +79,12 @@ public class World {
         return false;
     }
     
+    public boolean isTherePlayer(int x, int y) {
+        if (player.getX()==x&&player.getY()==y)
+            return true;
+        return false;
+    }
+    
     public void setItem(GroundedItem item) {
         items.add(item);
     }
@@ -93,7 +106,23 @@ public class World {
             creature.update();
         }
     }
+    
+    public void spawnPlayer(Player player) {
+        this.player = player;
+        
+        int x;
+        int y;
 
+        do {
+            x = (int)(Math.random() * width);
+            y = (int)(Math.random() * height);
+        }
+        while (!tile(x,y).isPassable() && !isThereCreature(x,y));
+
+        player.setX(x);
+        player.setY(y);
+    }
+    
     public void addAtEmptyLocation(Creature creature) {
         int x;
         int y;

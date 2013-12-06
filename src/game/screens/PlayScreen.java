@@ -7,6 +7,7 @@ import game.FieldOfView;
 import game.GroundedItem;
 import game.ItemFactory;
 import game.Message;
+import game.Player;
 import game.World;
 import game.WorldBuilder;
 import java.awt.Color;
@@ -20,7 +21,7 @@ public class PlayScreen implements Screen {
     private int screenHeight;
     private int mapWidth;
     private int mapHeight;
-    private Creature player;
+    private Player player;
     private FieldOfView fov;
     private ArrayList<Message> messages;
     private CreatureFactory creatureFactory;
@@ -74,7 +75,7 @@ public class PlayScreen implements Screen {
 
         displayTiles(terminal, left, top);
 
-        terminal.write(player.getGlyph(), player.getX() - left + 1, player.getY() - top + 1, player.getColor());
+        terminal.write('@', player.getX() - left + 1, player.getY() - top + 1, Color.WHITE);
     }
 
     private void displayTiles(AsciiPanel terminal, int left, int top) {

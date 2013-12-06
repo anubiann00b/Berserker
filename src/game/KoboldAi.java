@@ -4,9 +4,9 @@ import asciiPanel.AsciiPanel;
 import java.awt.Color;
 
 public class KoboldAi extends CreatureAi {
-    private Creature player;
+    private Player player;
     
-    KoboldAi(Creature creature, Creature player) {
+    public KoboldAi(Creature creature, Player player) {
         super(creature);
         this.player = player;
     }
@@ -24,7 +24,7 @@ public class KoboldAi extends CreatureAi {
         else
             wander();
     }
-
+    
     private void hunt() {
         int ox = creature.getX()-player.getX();
         int oy = creature.getY()-player.getY();
@@ -70,7 +70,7 @@ public class KoboldAi extends CreatureAi {
         */
     }
     
-    protected void addCritMessage(Creature other) {
+    protected void addCritMessage(Player other) {
         other.addMessage("The kobold pulls off a devasting attack!",AsciiPanel.brightRed);
         /*
         double r = Math.random();
@@ -87,7 +87,7 @@ public class KoboldAi extends CreatureAi {
         */
     }
     
-    protected void addCritMissMessage(Creature other) {
+    protected void addCritMissMessage(Player other) {
         other.addMessage("The kobold swings wildly.");
         /*
         double r = Math.random();
@@ -104,7 +104,7 @@ public class KoboldAi extends CreatureAi {
         */
     }
     
-    protected void addMissMessage(Creature other) {
+    protected void addMissMessage(Player other) {
         other.addMessage("The kobold barely misses you.", Color.WHITE);
         /*
         double r = Math.random();
@@ -121,7 +121,7 @@ public class KoboldAi extends CreatureAi {
         */
     }
     
-    protected void addHitMessage(Creature other) {
+    protected void addHitMessage(Player other) {
         other.addMessage("The kobold hits you.", AsciiPanel.red);
         /*
         double r = Math.random();
