@@ -135,20 +135,20 @@ public class Player implements Alive {
     }
 
     private void attack(Creature other) {
-        int atkRoll = (int) Math.floor(Math.random()*(this.atk-other.getEva()));
-        int dmgRoll = (int) Math.max(Math.floor(Math.random()*(this.dmg-other.getDmg())),1);
-        if (atkRoll >= 10) {
+        int attackRoll = 1 + (int) (Math.random()*20);
+        int attackVal = (int) attackRoll*(this.atk-other.getEva());
+        int damageVal = (int) Math.max(Math.floor(Math.random()*(this.dmg-other.getDef())),1);
+        if (attackRoll == 20) {
             ai.addCritMessage(other);
-            other.dealDamage(dmg*2);
+            other.dealDamage(damageVal*2);
             setRp(3);
-        } else if (atkRoll <= 1) {
+        } else if (attackRoll == 1) {
             ai.addCritMissMessage(other);
-            //setRp(-1);
-        } else if (atkRoll < 5) {
+        } else if (attackVal < 5) {
             ai.addMissMessage(other);
         } else {
             ai.addHitMessage(other);
-            other.dealDamage(dmg);
+            other.dealDamage(damageVal);
             setRp(1);
         }
         if (other.getCurrentHp()<1) {

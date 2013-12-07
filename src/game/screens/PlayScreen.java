@@ -115,17 +115,9 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_U: case KeyEvent.VK_NUMPAD9: scrollBy( 1,-1); break;
             case KeyEvent.VK_B: case KeyEvent.VK_NUMPAD1: scrollBy(-1, 1); break;
             case KeyEvent.VK_N: case KeyEvent.VK_NUMPAD3: scrollBy( 1, 1); break;
-            case KeyEvent.VK_P: player.setHp(-1); break;
-            case KeyEvent.VK_O: player.setHp(1); break;
-            case KeyEvent.VK_1: player.setRp(1); break;
-            case KeyEvent.VK_2: player.setRp(-1); break;
             case KeyEvent.VK_COMMA: case KeyEvent.VK_G: player.pickUp();
         }
-        //if (world.getKillCount()>=25) {
-        //    return new WinScreen();
-        //}
         world.update();
-        //Pathfinder.findPath(new Point(player.getX(),player.getY()), new Point(player.getX()+6,player.getY()+4), world.getMap());
         if (player.getCurrentHp()<1) {
             return new DieScreen();
         }

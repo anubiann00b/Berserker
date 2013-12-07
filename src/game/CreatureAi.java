@@ -42,8 +42,8 @@ public class CreatureAi {
     }
 
     protected void update() { }
-    protected void addCritMessage(Creature other) { }
-    protected void addCritMissMessage(Creature other) { }
-    protected void addMissMessage(Creature other) { }
-    protected void addHitMessage(Creature other) { }
+    protected void addCritMessage(Player other) { }
+    protected void addCritMissMessage(Player other) { }
+    protected void addMissMessage(Player other) { }
+    protected void addHitMessage(Player other) { }
 }
