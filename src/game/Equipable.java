@@ -18,14 +18,14 @@ public enum Equipable {
     EXECAXE ("Executioner's Axe", 1,  11, 0,  0,  2, '\\', AsciiPanel.blue,        0),
     
 // Armors                 Name  Atk Dmg Def Eva Rare Char   Color                Type
-    SHIRT               ("Shirt", 0,  0,  0,  0,  0, '(',  Color.DARK_GRAY,        1),
+    SHIRT               ("Shirt", 0,  0,  0,  0,  0, ')',  Color.DARK_GRAY,        1),
     STARWEAVE ("Starweave Armor", 0,  0,  1,  12, 1, ')',  AsciiPanel.brightBlue,  1),
-    CLOTH         ("Cloth Armor", 0,  0,  2,  8,  3, ']',  AsciiPanel.brightBlue,  1),
-    LEATHER     ("Leather Armor", 0,  0,  3,  6,  4, ')',  Color.LIGHT_GRAY,       1),
+    CLOTH         ("Cloth Armor", 0,  0,  2,  8,  3, ')',  AsciiPanel.brightBlue,  1),
+    LEATHER     ("Leather Armor", 0,  0,  3,  6,  4, ']',  Color.LIGHT_GRAY,       1),
     HIDE           ("Hide Armor", 0,  0,  4,  5,  4, ']',  Color.LIGHT_GRAY,       1),
-    SCALE         ("Scale Armor", 0,  0,  5,  4,  4, '}',  Color.LIGHT_GRAY,       1),
-    STEEL         ("Steel Armor", 0,  0,  7,  2,  3, ')',  AsciiPanel.blue,        1),
-    LEAD           ("Lead Armor", 0,  0,  9,  0,  1, ']',  AsciiPanel.blue,        1),
+    SCALE         ("Scale Armor", 0,  0,  5,  4,  4, ']',  Color.LIGHT_GRAY,       1),
+    STEEL         ("Steel Armor", 0,  0,  7,  2,  3, '}',  AsciiPanel.blue,        1),
+    LEAD           ("Lead Armor", 0,  0,  9,  0,  1, '}',  AsciiPanel.blue,        1),
     DIAMOND     ("Diamond Armor", 0,  0,  12, 1,  1, '}',  AsciiPanel.blue,        1),
     
 // Shields                Name  Atk Dmg Def Eva Rare Char   Color                Type

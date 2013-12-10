@@ -37,9 +37,9 @@ public class Player implements Alive {
         dmg = baseStats;
         eva = baseStats;
         def = baseStats;
-        this.weapon = new Item(Equipable.STICK, 0);
-        this.armor = new Item(Equipable.SHIRT, 0);
-        this.shield = new Item(Equipable.LONGSLEEVES, 0);
+        this.weapon = new Item(Equipable.STICK);
+        this.armor = new Item(Equipable.SHIRT);
+        this.shield = new Item(Equipable.LONGSLEEVES);
     }
     
     public int getX() { return this.x; }    

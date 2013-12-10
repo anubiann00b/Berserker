@@ -4,18 +4,19 @@ import asciiPanel.AsciiPanel;
 import java.awt.Color;
 
 public enum Status {
-    NONE("", Color.BLACK, 0, 0, 0, 0, 0, 0),
-    FREEZE("Frozen", AsciiPanel.brightBlue, 0, -3, 0, -2, 0, 3),
-    BURN("Burned", AsciiPanel.yellow, 4, 0, 0, 0, 0, 1),
-    POISON("Poisoned", AsciiPanel.green, -2, 0, 0, 0, 0, 6),
-    CONFUSE("Confused", AsciiPanel.brightYellow, 0, -2, 0, -2, 0, 3),
-    WEAKEN("Weakened", AsciiPanel.brightBlack, 0, -1, -3, -1, -3, 2),
-    BUFF("Strengthened", AsciiPanel.blue, 0, 1, 1, 1, 1, 6),
-    BERSERK("Berserk", AsciiPanel.brightMagenta, 0, 3, 6, 0, 0, 5),
-    EXHAUST("Exhausted", AsciiPanel.magenta, 0, -1, -2, 0, -1, 0),
-    BLEED("Bleeding", AsciiPanel.brightRed, -1, 0, 0, 0, 0, 8),
-    HEAL("Healed", AsciiPanel.brightGreen, 10, 0, 0, 0, 0, 0),
-    ROT("Rotting", AsciiPanel.black, -3, -2, -2, -2, -2, 5);
+//          Name             Color                      HP Atk Dmg Eva Def Duration
+    NONE    ("",              Color.BLACK,               0,  0,  0,  0,  0,  0),
+    FREEZE  ("Frozen",        AsciiPanel.brightBlue,     0, -3,  0, -2,  0,  3),
+    BURN    ("Burned",        AsciiPanel.yellow,         4,  0,  0,  0,  0,  1),
+    POISON  ("Poisoned",      AsciiPanel.green,         -2,  0,  0,  0,  0,  6),
+    CONFUSE ("Confused",      AsciiPanel.brightYellow,   0, -2,  0, -2,  0,  3),
+    WEAKEN  ("Weakened",      AsciiPanel.brightBlack,    0, -1, -3, -1, -3,  2),
+    BUFF    ("Strengthened",  AsciiPanel.blue,           0,  1,  1,  1,  1,  6),
+    BERSERK ("Berserk",       AsciiPanel.brightMagenta,  0,  3,  6,  0,  0,  5),
+    EXHAUST ("Exhausted",     AsciiPanel.magenta,        0, -1, -2,  0, -1,  0),
+    BLEED   ("Bleeding",      AsciiPanel.brightRed,     -1,  0,  0,  0,  0,  8),
+    HEAL    ("Healed",        AsciiPanel.brightGreen,    10, 0,  0,  0,  0,  0),
+    ROT     ("Rotting",       AsciiPanel.black,         -3, -2, -2, -2, -2,  5);
     
     private String description;
     public String getDescription() { return description; }

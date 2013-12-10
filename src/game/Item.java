@@ -22,11 +22,11 @@ public class Item {
         this.def = this.type.getDef() + brand.getDef();
     }
     
-    public Item(Equipable type, int enchant) {
-        this(type, Brand.NONE, enchant);
+    public Item(Equipable type) {
+        this(type, Brand.NONE);
     }
     
-    public Item(Equipable type, Brand brand, int enchant) {
+    public Item(Equipable type, Brand brand) {
         this.brand = brand;
         this.type = type;
         this.name = generateName(this.brand);
@@ -57,9 +57,7 @@ public class Item {
     private Equipable generateType() {
         int r = (int) Math.floor(Math.random()*NUMBER_OF_EQUIPABLES);
         Equipable[] equipables = Equipable.values();
-        
-       return equipables[r];
-       
+        return equipables[r];
     }
     
     private String generateName(Brand brand) {

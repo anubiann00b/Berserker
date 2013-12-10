@@ -36,25 +36,31 @@ public class PlayScreen implements Screen {
         createWorld();
         fov = new FieldOfView(world);
         creatureFactory = new CreatureFactory(world);
-        spawnCreatures();
+        spawnPlayer();
+        spawnPlants(0);
+        spawnKobolds(500);
         ItemFactory itemFactory = new ItemFactory(world);
-        spawnItems(itemFactory);
+        spawnItems(itemFactory, 1000);
     }
 
-    private void spawnCreatures() {
+    private void spawnPlayer() {
         player = creatureFactory.newPlayer(fov);
-
-        for (int i=0;i<50;i++) {
+    }
+    
+    private void spawnPlants(int num) {
+        for (int i=0;i<num;i++) {
             creatureFactory.newPlant();
-        }
-        
-        for (int i=0;i<50;i++) {
-            creatureFactory.newKobold(new FieldOfView(world), player);
         }
     }
     
-    private void spawnItems(ItemFactory itemFactory){
-        for (int i=0;i<80;i++){
+    private void spawnKobolds(int num) {
+        for (int i=0;i<num;i++) {
+            creatureFactory.newKobold(new FieldOfView(world), player);
+        }        
+    }
+    
+    private void spawnItems(ItemFactory itemFactory, int num){
+        for (int i=0;i<num;i++){
             itemFactory.spawnItem();
         }
     }
@@ -106,17 +112,30 @@ public class PlayScreen implements Screen {
     }
     
     public Screen respondToUserInput(KeyEvent key) {
-        switch (key.getKeyCode()) {
-            case KeyEvent.VK_LEFT: case KeyEvent.VK_NUMPAD4: case KeyEvent.VK_H: scrollBy(-1, 0); break;
-            case KeyEvent.VK_RIGHT: case KeyEvent.VK_NUMPAD6: case KeyEvent.VK_L: scrollBy(1, 0); break;
-            case KeyEvent.VK_UP: case KeyEvent.VK_NUMPAD8: case KeyEvent.VK_K: scrollBy(0,-1); break;
-            case KeyEvent.VK_DOWN: case KeyEvent.VK_NUMPAD2:case KeyEvent.VK_J: scrollBy(0, 1); break;
-            case KeyEvent.VK_Y: case KeyEvent.VK_NUMPAD7: scrollBy(-1,-1); break;
-            case KeyEvent.VK_U: case KeyEvent.VK_NUMPAD9: scrollBy( 1,-1); break;
-            case KeyEvent.VK_B: case KeyEvent.VK_NUMPAD1: scrollBy(-1, 1); break;
-            case KeyEvent.VK_N: case KeyEvent.VK_NUMPAD3: scrollBy( 1, 1); break;
-            case KeyEvent.VK_COMMA: case KeyEvent.VK_G: player.pickUp();
+        int k = key.getKeyCode();
+        
+        if (k==KeyEvent.VK_LEFT || k==KeyEvent.VK_NUMPAD4 || k==KeyEvent.VK_H) {
+            scrollBy(-1, 0);
+        } else if (k==KeyEvent.VK_RIGHT || k==KeyEvent.VK_NUMPAD6 || k==KeyEvent.VK_L) {
+            scrollBy(1, 0);
+        } else if (k==KeyEvent.VK_UP || k==KeyEvent.VK_NUMPAD8 || k==KeyEvent.VK_K) {
+            scrollBy(0,-1);
+        } else if (k==KeyEvent.VK_DOWN || k==KeyEvent.VK_NUMPAD2 || k==KeyEvent.VK_J) {
+            scrollBy(0, 1);
+        } else if (k==KeyEvent.VK_Y || k==KeyEvent.VK_NUMPAD7) {
+            scrollBy(-1,-1);
+        } else if (k==KeyEvent.VK_U || k==KeyEvent.VK_NUMPAD9) {
+            scrollBy( 1,-1);
+        } else if (k==KeyEvent.VK_B || k==KeyEvent.VK_NUMPAD1) {
+            scrollBy(-1, 1);
+        } else if (k==KeyEvent.VK_N || k==KeyEvent.VK_NUMPAD3) {
+            scrollBy( 1, 1);
+        } else if (k==KeyEvent.VK_COMMA || k==KeyEvent.VK_G) {
+            player.pickUp();
+        } else {
+            
         }
+        
         world.update();
         if (player.getCurrentHp()<1) {
             return new DieScreen();
