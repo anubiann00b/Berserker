@@ -63,11 +63,12 @@ public class Creature implements Alive {
     public void setDmg(int dmg) { this.dmg += dmg; }
     public void setEva(int eva) { this.eva += eva; }    
     public void setDef(int def) { this.def += def; }
-    public void setHp(int health) { this.currentHp = Math.max(0,Math.min(currentHp+health,maxHp)); }
+    public void setHp(int hp) { this.currentHp = Math.max(0,Math.min(currentHp+hp,maxHp)); }
     public void setCreatureAi(CreatureAi ai) { this.ai = ai; }
-    
-    public void update() { ai.update(); }
-    public void dealDamage(int damage) { setHp(Math.min(-damage,-1)); }
+    public void update() {
+        ai.update();
+    }
+    public void dealDamage(int dmg) { setHp(Math.min(-dmg,-1)); }
     public boolean canSee(int wx, int wy) { return ai.canSee(wx, wy); }
     
     public void moveBy(int mx, int my) {
