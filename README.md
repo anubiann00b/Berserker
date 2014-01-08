@@ -1,7 +1,7 @@
 Berserker
 =======
 
-A WIP roguelike loosely based of Dungeon Crawl Stone Soup written in Java.
+A WIPish roguelike VERY loosely based of Dungeon Crawl Stone Soup written in Java.
 
 Special Thanks:
 
