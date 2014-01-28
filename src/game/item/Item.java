@@ -41,6 +41,7 @@ public class Item {
     public String getName() { return name; }
     public Equipable getEquipable() { return type; }
     public Brand getBrand() { return brand; }
+    public boolean isBrand() { return brand!=Brand.NONE; }
     public int getAtk() { return atk; }
     public int getDmg() { return dmg; }
     public int getDef() { return def; }
