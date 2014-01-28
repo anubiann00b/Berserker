@@ -1,5 +1,8 @@
-package game;
+package game.world;
 
+import game.enemy.Creature;
+import game.item.GroundedItem;
+import game.player.Player;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +14,7 @@ public class World {
     private int height;
     private int width;
     private int killCount=0;
-    Player player;
+    private Player player;
     
     public int getKillCount() { return killCount; }
     public int getWidth() { return width; }

@@ -1,6 +1,9 @@
-package game;
+package game.player;
 
 import asciiPanel.AsciiPanel;
+import game.enemy.Creature;
+import game.message.Message;
+import game.world.Tile;
 import java.awt.Color;
 import java.util.ArrayList;
 

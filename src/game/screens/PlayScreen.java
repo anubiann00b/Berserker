@@ -1,15 +1,15 @@
 package game.screens;
 //                                                                              Screw the 80 character limit.
 import asciiPanel.AsciiPanel;
-import game.Creature;
-import game.CreatureFactory;
-import game.FieldOfView;
-import game.GroundedItem;
-import game.ItemFactory;
-import game.Message;
-import game.Player;
-import game.World;
-import game.WorldBuilder;
+import game.enemy.Creature;
+import game.enemy.CreatureFactory;
+import game.player.FieldOfView;
+import game.item.GroundedItem;
+import game.item.ItemFactory;
+import game.message.Message;
+import game.player.Player;
+import game.world.World;
+import game.world.WorldBuilder;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -111,6 +111,7 @@ public class PlayScreen implements Screen {
         player.moveBy(mx, my);
     }
     
+    @Override
     public Screen respondToUserInput(KeyEvent key) {
         int k = key.getKeyCode();
         
@@ -143,6 +144,7 @@ public class PlayScreen implements Screen {
         return this;
     }
     
+    @Override
     public void displayOutput(AsciiPanel terminal) {
         displayInfo(terminal);
         displayMessages(terminal);

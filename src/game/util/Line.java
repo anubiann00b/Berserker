@@ -1,4 +1,4 @@
-package game;
+package game.util;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,6 +40,7 @@ public class Line implements Iterable<Point> {
         return pointsOnLine;
     }
     
+    @Override
     public Iterator<Point> iterator() {
         return points.iterator();
     }

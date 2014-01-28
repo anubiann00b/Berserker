@@ -1,6 +1,12 @@
-package game;
+package game.enemy;
 
 import asciiPanel.AsciiPanel;
+import game.enemy.ai.KoboldAi;
+import game.enemy.ai.PlantAi;
+import game.player.FieldOfView;
+import game.player.Player;
+import game.player.PlayerAi;
+import game.world.World;
  
 public class CreatureFactory {
     private World world;

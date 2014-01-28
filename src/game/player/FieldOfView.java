@@ -1,9 +1,13 @@
-package game;
+package game.player;
+
+import game.util.Line;
+import game.util.Point;
+import game.world.Tile;
+import game.world.World;
 
 public class FieldOfView {
+    
     private World world;
-    private int depth;
- 
     private boolean[][] visible;
     
     public boolean isVisible(int x, int y) {

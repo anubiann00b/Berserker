@@ -1,4 +1,4 @@
-package game;
+package game.enumeration;
 
 public enum Brand {
 // Brands                   Name    Status      Atk Dmg Eva Def

@@ -1,4 +1,6 @@
-package game;
+package game.item;
+
+import game.enumeration.Brand;
 
 public class Item {
     private String name;

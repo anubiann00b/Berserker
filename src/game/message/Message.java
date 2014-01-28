@@ -1,8 +1,7 @@
-package game;
+package game.message;
 
 import java.awt.Color;
 import asciiPanel.AsciiPanel;
-import java.util.ArrayList;
 
 public class Message {
     private String message;

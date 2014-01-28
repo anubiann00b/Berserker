@@ -1,9 +1,13 @@
-package game;
+package game.enemy.ai;
 
 import asciiPanel.AsciiPanel;
+import game.enemy.Creature;
+import game.player.Player;
+import game.world.Tile;
 import java.awt.Color;
 
 public class KoboldAi extends CreatureAi {
+    
     private Player player;
     
     public KoboldAi(Creature creature, Player player) {
@@ -11,6 +15,7 @@ public class KoboldAi extends CreatureAi {
         this.player = player;
     }
     
+    @Override
     public void onEnter(int x, int y, Tile tile) {
         if (tile.isPassable()) {
             creature.setX(x);
@@ -18,6 +23,7 @@ public class KoboldAi extends CreatureAi {
         }
     }
         
+    @Override
     public void update() {
         if (creature.canSee(player.getX(),player.getY()))
             hunt();
@@ -43,19 +49,23 @@ public class KoboldAi extends CreatureAi {
         creature.moveBy(xIndex,yIndex);
     }
     
-    protected void addCritMessage(Player other) {
+    @Override
+    public void addCritMessage(Player other) {
         other.addMessage("The kobold pulls off a devasting attack!",AsciiPanel.brightRed);
     }
     
-    protected void addCritMissMessage(Player other) {
-        other.addMessage("The kobold swings wildly.");
+    @Override
+    public void addCritMissMessage(Player other) {
+        other.addMessage("The kobold swings wildly.",Color.LIGHT_GRAY);
     }
     
-    protected void addMissMessage(Player other) {
-        other.addMessage("The kobold barely misses you.", Color.WHITE);
+    @Override
+    public void addMissMessage(Player other) {
+        other.addMessage("The kobold barely misses you.",Color.WHITE);
     }
     
-    protected void addHitMessage(Player other) {
-        other.addMessage("The kobold hits you.", AsciiPanel.red);
+    @Override
+    public void addHitMessage(Player other) {
+        other.addMessage("The kobold hits you.",AsciiPanel.red);
     }
 }

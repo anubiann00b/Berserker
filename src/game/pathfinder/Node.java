@@ -1,8 +1,10 @@
-package game;
+package game.pathfinder;
 
+import game.util.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
  
 public class Node {
     private int x;
@@ -44,6 +46,7 @@ public class Node {
         this.parent = parent;
     }
         
+    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -57,6 +60,18 @@ public class Node {
         if (y != other.getY())
             return false;
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.x;
+        hash = 29 * hash + this.y;
+        hash = 29 * hash + this.g;
+        hash = 29 * hash + this.h;
+        hash = 29 * hash + this.f;
+        hash = 29 * hash + Objects.hashCode(this.parent);
+        return hash;
     }
     
     public List<Node> getNeighbors() {

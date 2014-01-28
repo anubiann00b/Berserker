@@ -1,4 +1,4 @@
-package game;
+package game.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +17,7 @@ public class Point {
     }
     
 
+    @Override
     public boolean equals(Object obj) {
         if (this == obj)
          return true;
@@ -30,6 +31,14 @@ public class Point {
         if (y != other.y)
          return false;
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + this.x;
+        hash = 67 * hash + this.y;
+        return hash;
     }
     
     public List<Point> getNeighbors() {

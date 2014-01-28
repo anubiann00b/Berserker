@@ -1,4 +1,4 @@
-package game;
+package game.world;
 
 public class WorldBuilder {
     private int width;

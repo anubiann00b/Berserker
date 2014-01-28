@@ -1,4 +1,6 @@
-package game;
+package game.item;
+
+import game.world.World;
 
 public class ItemFactory {
     private World world;

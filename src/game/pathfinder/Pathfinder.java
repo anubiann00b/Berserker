@@ -1,5 +1,7 @@
-package game;
+package game.pathfinder;
 
+import game.util.Point;
+import game.world.Tile;
 import java.util.ArrayList;
 
 public class Pathfinder {

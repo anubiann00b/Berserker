@@ -1,8 +1,15 @@
-package game;
+package game.enemy.ai;
 
+import game.enemy.Creature;
+import game.message.Message;
+import game.player.Player;
+import game.util.Line;
+import game.util.Point;
+import game.world.Tile;
 import java.util.ArrayList;
 
 public class CreatureAi {
+    
     protected Creature creature;
     
     public CreatureAi(Creature creature) {
@@ -41,9 +48,9 @@ public class CreatureAi {
         creature.moveBy(mx, my);
     }
 
-    protected void update() { }
-    protected void addCritMessage(Player other) { }
-    protected void addCritMissMessage(Player other) { }
-    protected void addMissMessage(Player other) { }
-    protected void addHitMessage(Player other) { }
+    public void update() { }
+    public void addCritMessage(Player other) { }
+    public void addCritMissMessage(Player other) { }
+    public void addMissMessage(Player other) { }
+    public void addHitMessage(Player other) { }
 }

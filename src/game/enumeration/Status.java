@@ -1,4 +1,4 @@
-package game;
+package game.enumeration;
 
 import asciiPanel.AsciiPanel;
 import java.awt.Color;

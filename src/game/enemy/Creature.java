@@ -1,5 +1,11 @@
-package game;
+package game.enemy;
 
+import game.enemy.Alive;
+import game.enemy.ai.CreatureAi;
+import game.item.Item;
+import game.player.Player;
+import game.world.Tile;
+import game.world.World;
 import java.awt.Color;
 
 public class Creature implements Alive {
