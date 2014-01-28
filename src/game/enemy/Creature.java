@@ -1,6 +1,5 @@
 package game.enemy;
 
-import game.enemy.Alive;
 import game.enemy.ai.CreatureAi;
 import game.item.Item;
 import game.player.Player;
