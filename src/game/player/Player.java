@@ -31,9 +31,9 @@ public class Player implements Alive {
     private Item weapon;
     private Item shield;
     private Item armor;
-    protected ArrayList<Message> messages = new ArrayList();
-    private ArrayList<Status> statuses = new ArrayList();
-    private ArrayList<Message> m = new ArrayList();
+    protected ArrayList<Message> messages = new ArrayList<Message>();
+    private ArrayList<Status> statuses = new ArrayList<Status>();
+    private ArrayList<Message> m = new ArrayList<Message>();
     
     public Player(World world, int maxHp, int maxRp, int baseStats) {
         this.world = world;

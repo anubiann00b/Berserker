@@ -27,7 +27,7 @@ public class PlayScreen implements Screen {
     private CreatureFactory creatureFactory;
 
     public PlayScreen() {
-        messages = new ArrayList();
+        messages = new ArrayList<Message>();
         messages.add(new Message("Game Started!"));
         screenWidth = 40;
         screenHeight = 14;
@@ -40,7 +40,7 @@ public class PlayScreen implements Screen {
         spawnPlants(0);
         spawnKobolds(500);
         ItemFactory itemFactory = new ItemFactory(world);
-        spawnItems(itemFactory, 1000);
+        spawnItems(itemFactory,1000);
     }
 
     private void spawnPlayer() {
@@ -115,6 +115,8 @@ public class PlayScreen implements Screen {
     public Screen respondToUserInput(KeyEvent key) {
         int k = key.getKeyCode();
         
+        boolean updated = true;
+
         if (k==KeyEvent.VK_LEFT || k==KeyEvent.VK_NUMPAD4 || k==KeyEvent.VK_H) {
             scrollBy(-1, 0);
         } else if (k==KeyEvent.VK_RIGHT || k==KeyEvent.VK_NUMPAD6 || k==KeyEvent.VK_L) {
@@ -134,13 +136,16 @@ public class PlayScreen implements Screen {
         } else if (k==KeyEvent.VK_COMMA || k==KeyEvent.VK_G) {
             player.pickUp();
         } else {
-            
+            updated = false;
         }
         
-        world.update();
+        if (updated)
+            world.update();
+        
         if (player.getCurrentHp()<1) {
             return new DieScreen();
         }
+        
         return this;
     }
     

@@ -25,8 +25,8 @@ public class World {
         this.tiles = tiles;
         this.width = tiles.length;
         this.height = tiles[0].length;
-        creatures = new ArrayList();
-        items = new ArrayList();
+        creatures = new ArrayList<Creature>();
+        items = new ArrayList<GroundedItem>();
     }
     
     public Tile tile(int x, int y){
