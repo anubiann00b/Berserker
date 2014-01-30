@@ -22,7 +22,6 @@ public class Creature implements Alive {
     private World world;
     private CreatureAi ai;
     private int visionRadius;
-    private boolean isEvil = true;
     private Item weapon;
     private Item shield;
     private Item armor;
@@ -39,7 +38,6 @@ public class Creature implements Alive {
         dmg = baseStats;
         eva = baseStats;
         def = baseStats;
-        isEvil = true;
     }
     
     public int getX() { return this.x; }    
@@ -57,7 +55,6 @@ public class Creature implements Alive {
     public Item getWeapon() { return this.weapon; }
     public Item getShield() { return this.shield; }
     public Item getArmor() { return this.armor; }
-    public boolean isEvil() { return this.isEvil; }
 
     public Tile getTile(int x, int y) { return world.tile(x, y); }
     public Creature getCreature(int x, int y) { return world.getCreature(x, y); }

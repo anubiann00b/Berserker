@@ -1,5 +1,5 @@
 package game.screens;
-//                                                                              Screw the 80 character limit.
+
 import asciiPanel.AsciiPanel;
 import game.enemy.Creature;
 import game.enemy.CreatureFactory;
@@ -25,6 +25,7 @@ public class PlayScreen implements Screen {
     private FieldOfView fov;
     private ArrayList<Message> messages;
     private CreatureFactory creatureFactory;
+    private final boolean XRAY_MODE = false;
 
     public PlayScreen() {
         messages = new ArrayList<Message>();
@@ -93,7 +94,7 @@ public class PlayScreen implements Screen {
 
                 Creature creature = world.getCreature(wx, wy);
                 GroundedItem item = world.getItem(wx, wy);
-                if (player.canSee(wx, wy)) {
+                if (player.canSee(wx, wy) || XRAY_MODE) {
                     terminal.write(world.getGlyph(wx, wy), x + 1, y + 1, world.getColor(wx, wy));
                     if (creature != null) {
                         terminal.write(creature.getGlyph(), creature.getX() - left + 1, creature.getY() - top + 1, creature.getColor());
@@ -157,7 +158,7 @@ public class PlayScreen implements Screen {
     }
     
     public void displayInfo(AsciiPanel terminal) {
-        terminal.write("BERSERKER V.1.0.0",42,1);
+        terminal.write("BERSERKER V.1.2.0",42,1);
         terminal.write("HP: " + player.getCurrentHp() + "/" + player.getMaxHp(),42,3);
         int hpRatio = 25*player.getCurrentHp()/player.getMaxHp();
         for (int i=0;i<hpRatio;i++) {

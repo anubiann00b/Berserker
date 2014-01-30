@@ -1,5 +1,7 @@
 package game.world;
 
+import java.util.Arrays;
+
 public class WorldBuilder {
     private int width;
     private int height;
@@ -52,8 +54,9 @@ public class WorldBuilder {
                 tiles2[x][y] = floors >= walls ? Tile.FLOOR : Tile.WALL;
                 }
             }
+            tiles = Arrays.copyOf(tiles2, tiles2.length);
         }
-        tiles = tiles2;
+        tiles = Arrays.copyOf(tiles2, tiles2.length);
         return this;
     }
 
