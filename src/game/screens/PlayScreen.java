@@ -25,7 +25,7 @@ public class PlayScreen implements Screen {
     private FieldOfView fov;
     private ArrayList<Message> messages;
     private CreatureFactory creatureFactory;
-    private final boolean XRAY_MODE = false;
+    private boolean XRAY_MODE = false;
 
     public PlayScreen() {
         messages = new ArrayList<Message>();

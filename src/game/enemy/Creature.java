@@ -56,8 +56,8 @@ public class Creature implements Alive {
     public Item getShield() { return this.shield; }
     public Item getArmor() { return this.armor; }
 
-    public Tile getTile(int x, int y) { return world.tile(x, y); }
-    public Creature getCreature(int x, int y) { return world.getCreature(x, y); }
+    public Tile getTile(int x, int y) { return world.tile(x,y); }
+    public Creature getCreature(int x, int y) { return world.getCreature(x,y); }
 
     public void setX(int x) { this.x = x; }    
     public void setY(int y) { this.y = y; }
