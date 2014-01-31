@@ -40,7 +40,7 @@ public class CreatureAi {
         int mx = (int) (Math.random()*3)-1;
         int my = (int) (Math.random()*3)-1;
         Creature other = creature.getCreature(creature.getX()+mx,creature.getY()+my);
-        while(other != null && other.isEvil() == true) {
+        while(other != null) {
             mx = (int) (Math.random()*3)-1;
             my = (int) (Math.random()*3)-1;
             other = creature.getCreature(creature.getX()+mx,creature.getY()+my);

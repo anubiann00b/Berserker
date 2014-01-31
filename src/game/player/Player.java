@@ -27,7 +27,6 @@ public class Player implements Alive {
     private World world;
     private PlayerAi ai;
     private int visionRadius;
-    private boolean isEvil = true;
     private Item weapon;
     private Item shield;
     private Item armor;
@@ -65,7 +64,6 @@ public class Player implements Alive {
     public Item getWeapon() { return this.weapon; }
     public Item getShield() { return this.shield; }
     public Item getArmor() { return this.armor; }
-    public boolean isEvil() { return this.isEvil; }
     public ArrayList<Message> getMessages() { return ai.getMessages(); }
 
     public Tile getTile(int x, int y) { return world.tile(x, y); }

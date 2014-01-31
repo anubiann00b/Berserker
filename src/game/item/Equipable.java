@@ -13,7 +13,7 @@ public enum Equipable {
     SWORD               ("Sword", 4,  7,  0,  0,  5, '^',  0),
     WARAXE            ("War Axe", 3,  8,  0,  0,  4, '\\', 0),
     BROADSWORD    ("Broad Sword", 2,  10, 0,  0,  3, '\\', 0),
-    EXECAXE ("Executioner's Axe", 1,  11, 0,  0,  2, '\\', 0),
+    WARHAMMER       ("Warhammer", 1,  11, 0,  0,  2, '\\', 0),
     
 // Armors                 Name  Atk Dmg Def Eva Rare Char Type
     SHIRT               ("Shirt", 0,  0,  0,  0,  0, ')',  1),

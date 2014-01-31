@@ -1,5 +1,5 @@
 package game.screens;
-//                                                                              Screw the 80 character limit.
+
 import asciiPanel.AsciiPanel;
 import game.enemy.Creature;
 import game.enemy.CreatureFactory;
@@ -25,6 +25,7 @@ public class PlayScreen implements Screen {
     private FieldOfView fov;
     private ArrayList<Message> messages;
     private CreatureFactory creatureFactory;
+    private boolean XRAY_MODE = false;
 
     public PlayScreen() {
         messages = new ArrayList<Message>();
@@ -93,7 +94,7 @@ public class PlayScreen implements Screen {
 
                 Creature creature = world.getCreature(wx, wy);
                 GroundedItem item = world.getItem(wx, wy);
-                if (player.canSee(wx, wy)) {
+                if (player.canSee(wx, wy) || XRAY_MODE) {
                     terminal.write(world.getGlyph(wx, wy), x + 1, y + 1, world.getColor(wx, wy));
                     if (creature != null) {
                         terminal.write(creature.getGlyph(), creature.getX() - left + 1, creature.getY() - top + 1, creature.getColor());
@@ -118,21 +119,23 @@ public class PlayScreen implements Screen {
         boolean updated = true;
 
         if (k==KeyEvent.VK_LEFT || k==KeyEvent.VK_NUMPAD4 || k==KeyEvent.VK_H) {
-            scrollBy(-1, 0);
+            scrollBy(-1,0);
         } else if (k==KeyEvent.VK_RIGHT || k==KeyEvent.VK_NUMPAD6 || k==KeyEvent.VK_L) {
-            scrollBy(1, 0);
+            scrollBy(1,0);
         } else if (k==KeyEvent.VK_UP || k==KeyEvent.VK_NUMPAD8 || k==KeyEvent.VK_K) {
             scrollBy(0,-1);
         } else if (k==KeyEvent.VK_DOWN || k==KeyEvent.VK_NUMPAD2 || k==KeyEvent.VK_J) {
-            scrollBy(0, 1);
+            scrollBy(0,1);
         } else if (k==KeyEvent.VK_Y || k==KeyEvent.VK_NUMPAD7) {
             scrollBy(-1,-1);
         } else if (k==KeyEvent.VK_U || k==KeyEvent.VK_NUMPAD9) {
-            scrollBy( 1,-1);
+            scrollBy(1,-1);
         } else if (k==KeyEvent.VK_B || k==KeyEvent.VK_NUMPAD1) {
-            scrollBy(-1, 1);
+            scrollBy(-1,1);
         } else if (k==KeyEvent.VK_N || k==KeyEvent.VK_NUMPAD3) {
-            scrollBy( 1, 1);
+            scrollBy(1,1);
+        } else if (k==KeyEvent.VK_S || k==KeyEvent.VK_PERIOD) {
+            scrollBy(0,0);
         } else if (k==KeyEvent.VK_COMMA || k==KeyEvent.VK_G) {
             player.pickUp();
         } else {
@@ -157,7 +160,7 @@ public class PlayScreen implements Screen {
     }
     
     public void displayInfo(AsciiPanel terminal) {
-        terminal.write("BERSERKER V.1.0.0",42,1);
+        terminal.write("BERSERKER V.1.2.0",42,1);
         terminal.write("HP: " + player.getCurrentHp() + "/" + player.getMaxHp(),42,3);
         int hpRatio = 25*player.getCurrentHp()/player.getMaxHp();
         for (int i=0;i<hpRatio;i++) {
