@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class PlayScreen implements Screen {
+    
     private World world;
     private int screenWidth;
     private int screenHeight;
@@ -26,6 +27,9 @@ public class PlayScreen implements Screen {
     private ArrayList<Message> messages;
     private CreatureFactory creatureFactory;
     private boolean XRAY_MODE = false;
+    
+    private long lastKeyPress = 0;
+    private int keyDelayTime = 100;
 
     public PlayScreen() {
         messages = new ArrayList<Message>();
@@ -114,10 +118,18 @@ public class PlayScreen implements Screen {
     
     @Override
     public Screen respondToUserInput(KeyEvent key) {
+        
+        long time = System.currentTimeMillis();
+        
+        if (time < lastKeyPress+keyDelayTime)
+            return this;
+        
+        lastKeyPress = time;
+        
         int k = key.getKeyCode();
         
         boolean updated = true;
-
+                
         if (k==KeyEvent.VK_LEFT || k==KeyEvent.VK_NUMPAD4 || k==KeyEvent.VK_H) {
             scrollBy(-1,0);
         } else if (k==KeyEvent.VK_RIGHT || k==KeyEvent.VK_NUMPAD6 || k==KeyEvent.VK_L) {
@@ -145,9 +157,8 @@ public class PlayScreen implements Screen {
         if (updated)
             world.update();
         
-        if (player.getCurrentHp()<1) {
+        if (player.getCurrentHp()<1)
             return new DieScreen();
-        }
         
         return this;
     }
